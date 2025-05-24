@@ -1,10 +1,10 @@
-import { useParams } from "react-router"
+import { Link, useParams } from "react-router"
 import * as FilmsAPI from "../services/films.api";
 import { useEffect, useState } from "react";
 import type { Film } from "../types/SWAPI-types/films.types";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorAlert from "../components/ErrorAlert";
-import { Container, Row, Col, Card, ListGroup } from "react-bootstrap";
+import { Container, Row, Col, Card, ListGroup, CardText, Accordion } from "react-bootstrap";
 
 
 const FilmPage = () => {
@@ -60,6 +60,21 @@ const FilmPage = () => {
 							<strong>Opening crawl:</strong><br />
 							<em>{film.opening_crawl}</em>
 							</Card.Text>
+
+							<Accordion className="mt-4">
+								<Accordion.Item eventKey="0">
+								<Accordion.Header>Characters</Accordion.Header>
+									<Accordion.Body>
+										<ListGroup variant="flush">
+										{film.characters.map((character) => (
+											<ListGroup.Item key={character.id}>
+												<Link to={`/people/${character.id}`}>{character.name}</Link>
+											</ListGroup.Item>
+										))}
+										</ListGroup>
+									</Accordion.Body>
+								</Accordion.Item>
+							</Accordion>
 
 							<ListGroup variant="flush" className="mt-3">
 							<ListGroup.Item>
