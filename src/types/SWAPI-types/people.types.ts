@@ -5,7 +5,7 @@ import type { NamedReference, TitledReference } from "../Common-types/reference.
 export interface Person {
 	id: number;
 	name: string;
-	birthyear: string;
+	birth_year: string;
 	eye_color: string;
 	hair_color: string;
 	height: string;
@@ -27,7 +27,7 @@ export interface Person {
 export interface PeopleListItem {
 	id: number;
 	name: string;
-	birthyear: string;
+	birth_year: string;
 	eye_color: string;
 	hair_color: string;
 	height: string;

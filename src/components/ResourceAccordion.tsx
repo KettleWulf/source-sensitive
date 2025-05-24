@@ -1,17 +1,24 @@
 import { Accordion, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router';
-import type { NamedReference } from '../types/Common-types/reference.types';
+import type { NamedReference, TitledReference } from '../types/Common-types/reference.types';
 
 
 interface Props {
   title: string;
-  items: NamedReference[];
+  items: Array<NamedReference | TitledReference>;
   basePath: string;
   eventKey: string;
 }
 
+const getLabel = (item: NamedReference | TitledReference): string => {
+	if ('name' in item) return item.name;
+	if ('title' in item) return item.title;
+	return 'Unknown';
+}
+
 const ResourceAccordion = ({ title, items, basePath, eventKey }: Props) => {
 	if (!items.length) return null;
+
 
 	return (
 	<Accordion.Item eventKey={eventKey}>
@@ -20,7 +27,7 @@ const ResourceAccordion = ({ title, items, basePath, eventKey }: Props) => {
 			<ListGroup variant="flush">
 				{items.map((item) => (
 					<ListGroup.Item key={item.id}>
-						<Link to={`/${basePath}/${item.id}`}>{item.name}</Link>
+						<Link to={`/${basePath}/${item.id}`}>{getLabel(item)}</Link>
 					</ListGroup.Item>
 				))}
 			</ListGroup>

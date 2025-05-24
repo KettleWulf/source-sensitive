@@ -11,6 +11,7 @@ import SpeciesPage from './pages/SpeciesPage';
 import VehiclesPage from './pages/VehiclesPage';
 import StarshipsPage from './pages/StarshipsPage';
 import FilmPage from './pages/FilmPage';
+import PersonPage from './pages/PersonPage';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
 					<Route path="/films" element={<FilmsPage />} />
 					<Route path="/films/:id" element={<FilmPage />} />
 					<Route path="/people" element={<PeoplePage />} />
+					<Route path="/people/:id" element={<PersonPage/>} />
 					<Route path="/planets" element={<PlanetsPage />} />
 					<Route path="/species" element={<SpeciesPage />} />
 					<Route path="/starships" element={<StarshipsPage />} />
