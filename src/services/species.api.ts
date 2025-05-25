@@ -3,7 +3,7 @@ import type { SpeciesListResponse, Species } from "../types/SWAPI-types/species.
 
 
 export const getSpecies = async () => {
-	const res = await api.get<SpeciesListResponse>("/planets");
+	const res = await api.get<SpeciesListResponse>("/species");
 
 	return res.data
 }

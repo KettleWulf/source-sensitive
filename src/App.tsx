@@ -12,6 +12,10 @@ import VehiclesPage from './pages/VehiclesPage';
 import StarshipsPage from './pages/StarshipsPage';
 import FilmPage from './pages/FilmPage';
 import PersonPage from './pages/PersonPage';
+import PlanetPage from './pages/PlanetPage';
+import SingleSpeciesPage from './pages/SingleSpeciesPage';
+import StarshipPage from './pages/StarshipPage';
+import VehiclePage from './pages/VehiclePage';
 
 function App() {
 
@@ -29,9 +33,13 @@ function App() {
 					<Route path="/people" element={<PeoplePage />} />
 					<Route path="/people/:id" element={<PersonPage/>} />
 					<Route path="/planets" element={<PlanetsPage />} />
+					<Route path="/planets/:id" element={<PlanetPage />} />
 					<Route path="/species" element={<SpeciesPage />} />
+					<Route path="/species/:id" element={<SingleSpeciesPage />} />
 					<Route path="/starships" element={<StarshipsPage />} />
+					<Route path="/starships/:id" element={<StarshipPage />} />
 					<Route path="/vehicles" element={<VehiclesPage />} />
+					<Route path="/vehicles/:id" element={<VehiclePage />} />
 
 
 					{/* <Route path="*" element={<NotFoundPage />} /> */}

@@ -28,7 +28,7 @@ export interface VehiclesListItem {
 	id: number;
 	name: string;
 	model: string;
-	starship_class: string;
+	vehicle_class: string;
 	manufacturer: string;
 	length: string;
 	cost_in_credits: string;
