@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { FilmListItem } from "../types/SWAPI-types/films.types";
+import type { FilmsListItem } from "../types/SWAPI-types/films.types";
 import * as FilmsAPI from "../services/films.api";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Row, Col } from 'react-bootstrap';
@@ -8,7 +8,7 @@ import FilmCard from "../components/cards/FilmCard";
 
 
 const FilmsPage = () => {
-	const [films, setFilms] = useState<FilmListItem[] | null>(null);
+	const [films, setFilms] = useState<FilmsListItem[] | null>(null);
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
 

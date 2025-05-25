@@ -1,12 +1,12 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-import type { FilmListItem } from '../../types/SWAPI-types/films.types';
+import type { FilmsListItem } from '../../types/SWAPI-types/films.types';
 import { Link } from 'react-router';
 
 
 interface FilmCardProps {
-	film: FilmListItem;
+	film: FilmsListItem;
 }
 
 const FilmCard: React.FC<FilmCardProps> = ({ film }) => {

@@ -20,7 +20,7 @@ export interface Planet {
 	films: TitledReference[];
 }
 
-export interface PlanetListItem {
+export interface PlanetsListItem {
 	id: number;
 	name: string;
 	rotation_period: string;
@@ -37,6 +37,6 @@ export interface PlanetListItem {
 	films_count: number;
 }
 
-export type PlanetListResponse = PaginatedResponse<PlanetListItem>
+export type PlanetsListResponse = PaginatedResponse<PlanetsListItem>
 
 type Resident = Omit<Person, "homeworld" | "films" | "species" | "starships" | "vehicles">;

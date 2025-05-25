@@ -21,7 +21,7 @@ export interface Film {
 	species: NamedReference[];
 }
 
-export interface FilmListItem {
+export interface FilmsListItem {
 	id: number;
 	title: string;
 	episode_id: string;
@@ -40,4 +40,4 @@ export interface FilmListItem {
 	species_count: number;
 }
 
-export type FilmListResponse = PaginatedResponse<FilmListItem>
+export type FilmListResponse = PaginatedResponse<FilmsListItem>
