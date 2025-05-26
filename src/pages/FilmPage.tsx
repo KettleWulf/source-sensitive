@@ -13,6 +13,8 @@ const FilmPage = () => {
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
 
+
+
 	const { id } = useParams();
 	const filmId = Number(id);
 
