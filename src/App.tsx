@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container'
 import "./assets/scss/App.scss";
 import Navigation from './components/Navigation'
 import HomePage from './pages/HomePage'
-import { Route, Routes, useNavigate, useSearchParams } from 'react-router'
+import { Route, Routes } from 'react-router'
 import FilmsPage from './pages/FilmsPage';
 import PeoplePage from './pages/PeoplePage';
 import PlanetsPage from './pages/PlanetsPage';
@@ -16,22 +16,13 @@ import PlanetPage from './pages/PlanetPage';
 import SingleSpeciesPage from './pages/SingleSpeciesPage';
 import StarshipPage from './pages/StarshipPage';
 import VehiclePage from './pages/VehiclePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
-	const navigate = useNavigate();
-	const [, setSearchParams] = useSearchParams();
-
-	const handleNavigation = (destination: string) => {
-		setSearchParams({ page: "1", query: "" });
-
-		navigate("/" + destination);
-	}
-
-
 	return (
 		
 		<div id="App">
-			<Navigation onNavigate={handleNavigation}/>
+			<Navigation />
 
 			<Container className="py-3">
 				<Routes>
@@ -50,7 +41,7 @@ function App() {
 					<Route path="/vehicles/:id" element={<VehiclePage />} />
 
 
-					{/* <Route path="*" element={<NotFoundPage />} /> */}
+					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</Container>
 		</div>
