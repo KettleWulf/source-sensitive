@@ -8,6 +8,8 @@ import ErrorAlert from "../components/ErrorAlert";
 import type { PeopleListItem, PeopleListResponse } from "../types/SWAPI-types/people.types";
 import PersonCard from "../components/cards/PersonCard";
 import Pagination from "../components/Pagination";
+import { useSearchParams } from "react-router";
+import SearchBar from "../components/SearchBar";
 
 
 const PeoplePage = () => {
@@ -15,16 +17,18 @@ const PeoplePage = () => {
 	const [fullResponse, setFullResponse] = useState<PeopleListResponse | null>(null);
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
+	const [searchParams, setSearchParams] = useSearchParams();
 
-	const [page, setPage] = useState(1);
+	const page = Number(searchParams.get("page")) || 1;
+	const query = searchParams.get("query") || "";
 
-	const getPeople = async (page: number) => {
+	const getPeople = async (page: number, query: string) => {
 		setPeople(null);
 		setError(false);
 		setIsloading(true);
 
 		try {
-			const res = await PeopleApi.getPeople(page);
+			const res = await PeopleApi.getPeople(page, query);
 			setPeople(res.data);
 			setFullResponse(res);
 			setIsloading(false);
@@ -35,9 +39,18 @@ const PeoplePage = () => {
 
 	}
 
+	const handlePageChange = (newPage: number) => {
+		setSearchParams({ query, page: newPage.toString()})
+	}
+
+	const handleSearch = (newQuery: string) => {
+		setSearchParams({ query: newQuery, page: "1" });
+	}
+
 	useEffect(() => {
-		getPeople(page)
-	}, [page])
+		getPeople(page, query);
+
+	}, [page, query]);
 
 	if (isLoading) {
 		return <LoadingSpinner />;
@@ -52,7 +65,9 @@ const PeoplePage = () => {
 		<div className="container">
 			<h1>People</h1>
 
-			{fullResponse && <p>Showing {fullResponse.from}-{fullResponse.to} of {fullResponse.total} results. </p>}
+			<SearchBar onSearch={handleSearch} category="People" />
+
+			{fullResponse && <p className="ms-2 mb-1 text-muted small">Showing {fullResponse.from}-{fullResponse.to} of {fullResponse.total} results. </p>}
 			<Row xs={1} sm={2} md={3} className="g-4">
 				{people && people.map(person => (
 				<Col key={person.id}>
@@ -63,11 +78,8 @@ const PeoplePage = () => {
 
 			{fullResponse && <Pagination 
 				hasNextPage={Boolean(fullResponse.next_page_url)}
-				onNextPage={() => setPage(prevValue => prevValue + 1)}
 				hasPreviousPage={Boolean(fullResponse.prev_page_url)}
-				onPreviousPage={() => setPage(prevValue => prevValue - 1)}
-				onFirstPage={() => setPage(1)}
-				onLastPage={() => setPage(fullResponse.last_page)}
+				onPageChange={handlePageChange}
 				page={page}
 				totalPages={fullResponse.last_page}
 			/>}

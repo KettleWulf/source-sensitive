@@ -5,10 +5,7 @@ import { Button } from "react-bootstrap";
 interface PaginationProps {
 	hasNextPage: boolean;
 	hasPreviousPage: boolean;
-	onNextPage: () => void;
-	onPreviousPage: () => void;
-	onFirstPage: () => void;
-	onLastPage: () => void;
+	onPageChange: (newPage: number) => void;
 	page: number;
 	totalPages: number;
 }
@@ -16,10 +13,7 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({
 	hasNextPage,
 	hasPreviousPage,
-	onNextPage,
-	onPreviousPage,
-	onFirstPage,
-	onLastPage,
+	onPageChange,
 	page,
 	totalPages,
 }) => {
@@ -28,19 +22,19 @@ const Pagination: React.FC<PaginationProps> = ({
 			<div className="first">
 				<Button
 					disabled={!hasPreviousPage}
-					onClick={onFirstPage}
+					onClick={() => onPageChange(1)}
 					variant="primary"
 				>«</Button>
 
 				<Button
 					className="ms-1"
 					disabled={!hasPreviousPage}
-					onClick={onPreviousPage}
+					onClick={() => onPageChange(page - 1)}
 					variant="primary"
 				>Previous Page</Button>
 			</div>
 
-			<div className="page">
+			<div className="page ms-2 mb-1 text-muted small">
 				Page {page}
 				{totalPages && "/" + totalPages}
 			</div>
@@ -48,14 +42,14 @@ const Pagination: React.FC<PaginationProps> = ({
 			<div className="next">
 				<Button
 					disabled={!hasNextPage}
-					onClick={onNextPage}
+					onClick={() => onPageChange(page + 1)}
 					variant="primary"
 				>Next Page</Button>
 
 				<Button
 					className="ms-1"
 					disabled={!hasNextPage}
-					onClick={onLastPage}
+					onClick={() => onPageChange(totalPages)}
 					variant="primary"
 				>»</Button>
 			</div>
