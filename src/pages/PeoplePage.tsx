@@ -7,10 +7,12 @@ import ErrorAlert from "../components/ErrorAlert";
 import type { PeopleListItem, PeopleListResponse } from "../types/SWAPI-types/people.types";
 import PersonCard from "../components/cards/PersonCard";
 import Pagination from "../components/paginations/Pagination";
-import { Link, useSearchParams } from "react-router";
+import { Link } from "react-router";
 import SearchBar from "../components/SearchBar";
 import BB8Spinner from "../components/spinners/BB8Spinner";
 import LoadingSpinner from "../components/spinners/LoadingSpinner";
+
+import { useSearchAndPagination } from "../hooks/useSearchAndPagination";
 
 
 const PeoplePage = () => {
@@ -19,10 +21,10 @@ const PeoplePage = () => {
 	const [error, setError] = useState<string | false>(false);
 	const [isFetching, setIsFetching] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [searchParams, setSearchParams] = useSearchParams();
 
-	const page = Number(searchParams.get("page")) || 1;
-	const query = searchParams.get("query") || "";
+	const { page, query, handlePageChange, handleSearch } = useSearchAndPagination();
+
+	const resourceCategory = "People"
 
 	const getPeople = async (page: number, query: string) => {
 
@@ -42,35 +44,26 @@ const PeoplePage = () => {
 
 	}
 
-	const handlePageChange = (newPage: number) => {
-		setSearchParams({ query, page: newPage.toString()})
-	}
-
-	const handleSearch = (newQuery: string) => {
-		setSearchParams({ query: newQuery, page: "1" });
-	}
 
 	useEffect(() => {
 		getPeople(page, query);
-
 	}, [page, query]);
 
 	useEffect(() => {
 		setIsLoading(!people);
-
 	}, [people]);
 
 	
 
 	return (
 		<div className="container mt-3">
-			<Link to="/people" className="discreet-link">
-				<h1 className="h2">People</h1>
+			<Link to={"/" + resourceCategory.toLowerCase()} className="discreet-link">
+				<h1 className="h2">{resourceCategory}</h1>
 			</Link>
 
 			<SearchBar 
 				onSearch={handleSearch} 
-				category="People"
+				category={resourceCategory}
 				currentQuery={query}
 			/>
 
