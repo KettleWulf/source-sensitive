@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 import { Link } from 'react-router';
 import type { PeopleListItem } from '../../types/SWAPI-types/people.types';
+import { getFallbackImage } from '../../utils/getFallbackImage';
 
 
 interface PersonCardProps {
@@ -11,29 +12,40 @@ interface PersonCardProps {
 
 const PersonCard: React.FC<PersonCardProps> = ({ person }) => {
 	return (
-	<Card>
-		<Card.Body>
-			<Card.Title>{person.name}</Card.Title>
-			<Card.Text>
-				<strong>Homeworld:</strong> {person.homeworld.name}
-			</Card.Text>
-			<Card.Text>
-				<strong>Birthyear:</strong> {person.birth_year}
-			</Card.Text>
-			<Card.Text>
-				<strong>Birthyear:</strong> {person.height}
-			</Card.Text>
-			<Card.Text>
-				<strong>Birthyear:</strong> {person.birth_year}
-			</Card.Text>
-			<Card.Text>
-				<strong>Appearances: </strong>{person.films_count}
-			</Card.Text>
-			<Link to={`/people/${person.id}`}>
-				<Button variant="primary">Read more</Button>
-			</Link>
-		</Card.Body>
-    </Card>
+	<Link to={`/people/${person.id}`} className="text-decoration-none text-dark">
+		<Card className="card-hover-effect h-100">
+
+			<Card.Img
+				variant="top"
+				src={person.image_url || getFallbackImage(person.name, "People")}
+				alt={person.name}
+				className="image-ratio"
+				/>
+
+			<Card.Body className="card-body-relative d-flex flex-column">
+				<Card.Title className="starwars-font card-title-clamp mb-2 fs-4">{person.name}</Card.Title>
+				<Card.Text className="mb-1">
+					<strong>Homeworld:</strong> {person.homeworld.name}
+				</Card.Text>
+				<Card.Text className="mb-1">
+					<strong>Birthyear:</strong> {person.birth_year}
+				</Card.Text>
+				<Card.Text className="mb-1">
+					<strong>Height:</strong> {person.height}
+				</Card.Text>
+				<Card.Text className="mb-5">
+					<strong>Appearances: </strong>{person.films_count}
+				</Card.Text>
+				
+				<div className="card-button-bottom-right mt-3">
+					<Link to={`/people/${person.id}`}>
+						<Button variant="light" size="sm">Read more</Button>
+					</Link>
+				</div>
+
+			</Card.Body>
+		</Card>
+	</Link>
   );
 };
 

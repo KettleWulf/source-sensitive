@@ -68,7 +68,7 @@ const PeoplePage = () => {
 			<SearchBar onSearch={handleSearch} category="People" />
 
 			{fullResponse && <p className="ms-2 mb-1 text-muted small">Showing {fullResponse.from}-{fullResponse.to} of {fullResponse.total} results. </p>}
-			<Row xs={1} sm={2} md={3} className="g-4">
+			<Row xs={1} sm={2} md={5} className="g-4">
 				{people && people.map(person => (
 				<Col key={person.id}>
 					<PersonCard person={person} />

@@ -6,9 +6,3 @@ const api = axios.create({
 });
 
 export default api;
-
-/**
-if (!API_KEY) {
-		throw new Error("VITE_CATAPI_KEY missing in environment");
-	}
-*/

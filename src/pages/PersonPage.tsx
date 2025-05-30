@@ -1,11 +1,12 @@
-import { useParams } from "react-router"
+import { Link, useParams } from "react-router"
 import * as PeopleAPI from "../services/people.api";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ErrorAlert from "../components/ErrorAlert";
-import { Container, Row, Col, Card, ListGroup, Accordion } from "react-bootstrap";
+import { Container, Row, Col, Card, ListGroup, Accordion, Button } from "react-bootstrap";
 import ResourceAccordion from "../components/ResourceAccordion";
 import type { Person } from "../types/SWAPI-types/people.types";
+import { getFallbackImage } from "../utils/getFallbackImage";
 
 
 const PersonPage = () => {
@@ -46,68 +47,54 @@ const PersonPage = () => {
 	}
 
 	return (
-		person && <Container className="my-5">
-			<Row className="justify-content-center">
-				<Col md={8}>
-					<Card>
-						<Card.Img variant="top" src={person.image_url} alt={person.name} />
-						<Card.Body>
-							<Card.Title as="h1">{person.name}</Card.Title>
+		person && (
+			// <Link to={`/people`} className="text-decoration-none text-dark">
+				<Container className="my-5">
+					<Row className="justify-content-center">
+						<Col md={8}>
+							<Card className="shadow">
+								<Row className="g-0"> {/* g-0 för att ta bort extra gutters mellan kolumner */}
+								<Col md={4}>
+									<Card.Img 
+									src={person.image_url || getFallbackImage(person.name, "People")} 
+									alt={person.name}
+									style={{ height: "100%", objectFit: "cover" }}
+									/>
+								</Col>
+								<Col md={8}>
+									<Card.Body>
+										<Card.Title as="h1" className="starwars-font">{person.name}</Card.Title>
 
-							<ListGroup variant="flush" className="mt-3">
-							<ListGroup.Item>
-								<strong>Birth Year:</strong> {person.birth_year}
-							</ListGroup.Item>
-							<ListGroup.Item>
-								<strong>Home World:</strong> {person.homeworld.name}
-							</ListGroup.Item>
-							<ListGroup.Item>
-								<strong>Eye Color:</strong> {person.eye_color}
-							</ListGroup.Item>
-							<ListGroup.Item>
-								<strong>Hair Color:</strong> {person.hair_color}
-							</ListGroup.Item>
-							<ListGroup.Item>
-								<strong>Height:</strong> {person.height}
-							</ListGroup.Item>
-							<ListGroup.Item>
-								<strong>Mass:</strong> {person.mass}
-							</ListGroup.Item>
-							</ListGroup>
+										<ListGroup variant="flush" className="mt-3">
+											<ListGroup.Item><strong>Birth Year:</strong> {person.birth_year}</ListGroup.Item>
+											<ListGroup.Item><strong>Home World:</strong> {person.homeworld.name}</ListGroup.Item>
+											<ListGroup.Item><strong>Eye Color:</strong> {person.eye_color}</ListGroup.Item>
+											<ListGroup.Item><strong>Hair Color:</strong> {person.hair_color}</ListGroup.Item>
+											<ListGroup.Item><strong>Height:</strong> {person.height}</ListGroup.Item>
+											<ListGroup.Item><strong>Mass:</strong> {person.mass}</ListGroup.Item>
+										</ListGroup>
 
-							<Accordion className="mt-4">
-								<ResourceAccordion
-									title="Films"
-									items={person.films}
-									basePath="films"
-									eventKey="0"
-								/>
-								<ResourceAccordion
-									title="Species"
-									items={person.species}
-									basePath="species"
-									eventKey="1"
-								/>
-								<ResourceAccordion
-									title="Starships"
-									items={person.starships}
-									basePath="starships"
-									eventKey="2"
-								/>
-								<ResourceAccordion
-									title="Vehicles"
-									items={person.vehicles}
-									basePath="vehicles"
-									eventKey="3"
-								/>
-							</Accordion>
+										<Accordion className="mt-4 mb-5">
+											<ResourceAccordion title="Films" items={person.films} basePath="films" eventKey="0" />
+											<ResourceAccordion title="Species" items={person.species} basePath="species" eventKey="1" />
+											<ResourceAccordion title="Starships" items={person.starships} basePath="starships" eventKey="2" />
+											<ResourceAccordion title="Vehicles" items={person.vehicles} basePath="vehicles" eventKey="3" />
+										</Accordion>
+									</Card.Body>
+								</Col>
+								</Row>
+									<div className="card-button-bottom-right mt-3">
+										<Link to={`/people`}>
+											<Button variant="light">Back</Button>
+										</Link>
+									</div>
+								</Card>
+						</Col>
+					</Row>
 
-						</Card.Body>
-					</Card>
-				</Col>
-			</Row>
-		</Container>
+				</Container>
+			// </Link>
 	)
-}
+)}
 
 export default PersonPage
