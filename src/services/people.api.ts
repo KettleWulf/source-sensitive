@@ -5,6 +5,9 @@ import type { PeopleListResponse, Person } from "../types/SWAPI-types/people.typ
 export const getPeople = async (page = 1, query?: string) => {
 	const queryString = query ? `&search=${query}` : "";
 	const res = await api.get<PeopleListResponse>(`/people?page=${page}${queryString}`);
+
+	await new Promise(r => setTimeout(r, 15000));
+
 	return res.data;
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { FilmListResponse, FilmsListItem } from "../types/SWAPI-types/films.types";
 import * as FilmsAPI from "../services/films.api";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
 import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
 import FilmCard from "../components/cards/FilmCard";

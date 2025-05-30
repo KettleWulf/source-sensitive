@@ -6,6 +6,7 @@ import type { PeopleListItem } from '../../types/SWAPI-types/people.types';
 import { getFallbackImage } from '../../utils/getFallbackImage';
 
 
+
 interface PersonCardProps {
 	person: PeopleListItem;
 }
@@ -13,7 +14,7 @@ interface PersonCardProps {
 const PersonCard: React.FC<PersonCardProps> = ({ person }) => {
 	return (
 	<Link to={`/people/${person.id}`} className="text-decoration-none text-dark">
-		<Card className="card-hover-effect h-100">
+		<Card className="shadow-lightsaber-blue-hover hover-grow-effect h-100">
 
 			<Card.Img
 				variant="top"
@@ -31,16 +32,14 @@ const PersonCard: React.FC<PersonCardProps> = ({ person }) => {
 					<strong>Birthyear:</strong> {person.birth_year}
 				</Card.Text>
 				<Card.Text className="mb-1">
-					<strong>Height:</strong> {person.height}
+					<strong>Height:</strong> {person.height} cm
 				</Card.Text>
 				<Card.Text className="mb-5">
 					<strong>Appearances: </strong>{person.films_count}
 				</Card.Text>
 				
 				<div className="card-button-bottom-right mt-3">
-					<Link to={`/people/${person.id}`}>
-						<Button variant="light" size="sm">Read more</Button>
-					</Link>
+					<Button variant="light" size="sm">Read More</Button>
 				</div>
 
 			</Card.Body>

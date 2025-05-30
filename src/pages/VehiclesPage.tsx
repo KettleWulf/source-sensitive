@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import * as VehiclesApi from "../services/vehicles.api";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
 import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
 

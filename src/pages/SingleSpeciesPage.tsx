@@ -1,7 +1,7 @@
 import { useParams } from "react-router"
 import * as SpeciesAPI from "../services/species.api";
 import { useEffect, useState } from "react";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
 import ErrorAlert from "../components/ErrorAlert";
 import { Container, Row, Col, Card, ListGroup, Accordion } from "react-bootstrap";
 import ResourceAccordion from "../components/ResourceAccordion";

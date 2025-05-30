@@ -1,19 +1,22 @@
-import { Link, useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import * as PeopleAPI from "../services/people.api";
 import { useEffect, useState } from "react";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
 import ErrorAlert from "../components/ErrorAlert";
 import { Container, Row, Col, Card, ListGroup, Accordion, Button } from "react-bootstrap";
 import ResourceAccordion from "../components/ResourceAccordion";
 import type { Person } from "../types/SWAPI-types/people.types";
 import { getFallbackImage } from "../utils/getFallbackImage";
 import { joinStringArray } from "../utils/joinStringArray";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 
 
 const PersonPage = () => {
 	const [person, setPerson] = useState<Person | null>(null);
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
+
+	const navigate = useNavigate()
 
 	const { id } = useParams();
 	const personId = Number(id);
@@ -49,12 +52,12 @@ const PersonPage = () => {
 
 	return (
 		person && (
-			// <Link to={`/people`} className="text-decoration-none text-dark">
+
 				<Container className="my-5">
 					<Row className="justify-content-center">
 						<Col md={8}>
-							<Card className="shadow">
-								<Row className="g-0"> {/* g-0 för att ta bort extra gutters mellan kolumner */}
+							<Card className="shadow-lightsaber-blue">
+								<Row className="g-0">
 								<Col md={4}>
 									<Card.Img 
 									src={person.image_url || getFallbackImage(person.name, "People")} 
@@ -85,16 +88,18 @@ const PersonPage = () => {
 								</Col>
 								</Row>
 									<div className="card-button-bottom-right mt-3">
-										<Link to={`/people`}>
-											<Button variant="light">Back</Button>
-										</Link>
+										
+											<Button variant="light" onClick={() => navigate(-1)}>
+											<MdKeyboardDoubleArrowLeft />Back
+											</Button>
+										
 									</div>
 								</Card>
 						</Col>
 					</Row>
 
 				</Container>
-			// </Link>
+
 	)
 )}
 

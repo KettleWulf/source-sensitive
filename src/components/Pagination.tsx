@@ -23,14 +23,14 @@ const Pagination: React.FC<PaginationProps> = ({
 				<Button
 					disabled={!hasPreviousPage}
 					onClick={() => onPageChange(1)}
-					variant="primary"
+					variant="light"
 				>«</Button>
 
 				<Button
 					className="ms-1"
 					disabled={!hasPreviousPage}
 					onClick={() => onPageChange(page - 1)}
-					variant="primary"
+					variant="light"
 				>Previous Page</Button>
 			</div>
 
@@ -43,14 +43,14 @@ const Pagination: React.FC<PaginationProps> = ({
 				<Button
 					disabled={!hasNextPage}
 					onClick={() => onPageChange(page + 1)}
-					variant="primary"
+					variant="light"
 				>Next Page</Button>
 
 				<Button
 					className="ms-1"
 					disabled={!hasNextPage}
 					onClick={() => onPageChange(totalPages)}
-					variant="primary"
+					variant="light"
 				>»</Button>
 			</div>
 		</div>

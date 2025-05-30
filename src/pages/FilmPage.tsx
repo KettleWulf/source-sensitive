@@ -2,7 +2,7 @@ import { useParams } from "react-router"
 import * as FilmsAPI from "../services/films.api";
 import { useEffect, useState } from "react";
 import type { Film } from "../types/SWAPI-types/films.types";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
 import ErrorAlert from "../components/ErrorAlert";
 import { Container, Row, Col, Card, ListGroup, Accordion } from "react-bootstrap";
 import ResourceAccordion from "../components/ResourceAccordion";

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 
 import * as PeopleApi from "../services/people.api";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
 import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
 
 import type { PeopleListItem, PeopleListResponse } from "../types/SWAPI-types/people.types";
 import PersonCard from "../components/cards/PersonCard";
 import Pagination from "../components/Pagination";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import SearchBar from "../components/SearchBar";
+import BB8Spinner from "../components/spinners/BB8Spinner";
 
 
 const PeoplePage = () => {
@@ -52,23 +53,30 @@ const PeoplePage = () => {
 
 	}, [page, query]);
 
-	if (isLoading) {
-		return <LoadingSpinner />;
-	}
 
-	if (error) {
-		return <ErrorAlert>{error}</ErrorAlert>
-	}
 	
 
 	return (
-		<div className="container">
-			<h1>People</h1>
+		<div className="container mt-3">
+			<Link to="/people" className="discreet-link">
+				<h1 className="h2">People</h1>
+			</Link>
 
-			<SearchBar onSearch={handleSearch} category="People" />
+			<SearchBar 
+				onSearch={handleSearch} 
+				category="People"
+				currentQuery={query}
+			/>
 
-			{fullResponse && <p className="ms-2 mb-1 text-muted small">Showing {fullResponse.from}-{fullResponse.to} of {fullResponse.total} results. </p>}
-			<Row xs={1} sm={2} md={5} className="g-4">
+			{fullResponse && (
+				<p className="ms-2 mb-1 text-muted small">
+					{query
+						? <>Showing {fullResponse.total} results for <em>"{query}"</em></>
+						: `Showing ${fullResponse.from}-${fullResponse.to} of ${fullResponse.total} results.`}
+				</p>
+			)}
+			
+			<Row xs={1} sm={2} md={5} className="g-4 min-height-400">
 				{people && people.map(person => (
 				<Col key={person.id}>
 					<PersonCard person={person} />
@@ -83,6 +91,10 @@ const PeoplePage = () => {
 				page={page}
 				totalPages={fullResponse.last_page}
 			/>}
+
+			{isLoading && <BB8Spinner />}
+
+			{error && <ErrorAlert>{error}</ErrorAlert>}
 		</div>
 );
 }
