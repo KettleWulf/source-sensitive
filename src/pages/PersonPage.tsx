@@ -7,6 +7,7 @@ import { Container, Row, Col, Card, ListGroup, Accordion, Button } from "react-b
 import ResourceAccordion from "../components/ResourceAccordion";
 import type { Person } from "../types/SWAPI-types/people.types";
 import { getFallbackImage } from "../utils/getFallbackImage";
+import { joinStringArray } from "../utils/joinStringArray";
 
 
 const PersonPage = () => {
@@ -71,7 +72,7 @@ const PersonPage = () => {
 											<ListGroup.Item><strong>Eye Color:</strong> {person.eye_color}</ListGroup.Item>
 											<ListGroup.Item><strong>Hair Color:</strong> {person.hair_color}</ListGroup.Item>
 											<ListGroup.Item><strong>Height:</strong> {person.height}</ListGroup.Item>
-											<ListGroup.Item><strong>Mass:</strong> {person.mass}</ListGroup.Item>
+											<ListGroup.Item><strong>Affiliations:</strong> {joinStringArray(person.affiliations)}</ListGroup.Item>
 										</ListGroup>
 
 										<Accordion className="mt-4 mb-5">
