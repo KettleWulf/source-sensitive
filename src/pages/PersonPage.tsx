@@ -9,12 +9,14 @@ import type { Person } from "../types/SWAPI-types/people.types";
 import { getFallbackImage } from "../utils/getFallbackImage";
 import { joinStringArray } from "../utils/joinStringArray";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import DetailsPagination from "../components/paginations/DetailsPagination";
 
 
 const PersonPage = () => {
 	const [person, setPerson] = useState<Person | null>(null);
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
+	const [isNextPerson, setIsNextPerson] = useState(true);
 
 	const navigate = useNavigate()
 
@@ -37,9 +39,20 @@ const PersonPage = () => {
 			}
 	
 		}
+
+	const getNextPerson = async (id: number) => {
+		
+		try {
+			await PeopleAPI.getPerson(id + 1);
+			setIsNextPerson(true);
+		} catch {
+			setIsNextPerson(false);
+		}
+	}
 	
 	useEffect(() => {
 		getPerson(personId)
+		getNextPerson(personId)
 	}, [personId])
 
 	if (isLoading) {
@@ -52,11 +65,11 @@ const PersonPage = () => {
 
 	return (
 		person && (
-
 				<Container className="my-5">
 					<Row className="justify-content-center">
 						<Col md={8}>
-							<Card className="shadow-lightsaber-blue">
+							<Card 
+								className="shadow-lightsaber-blue">
 								<Row className="g-0">
 								<Col md={4}>
 									<Card.Img 
@@ -87,17 +100,22 @@ const PersonPage = () => {
 									</Card.Body>
 								</Col>
 								</Row>
-									<div className="card-button-bottom-right mt-3">
-										
-											<Button variant="light" onClick={() => navigate(-1)}>
-											<MdKeyboardDoubleArrowLeft />Back
-											</Button>
-										
-									</div>
-								</Card>
+								<div className="card-button-bottom-right mt-3">
+									
+										<Button variant="light" onClick={() => navigate(-1)}>
+										<MdKeyboardDoubleArrowLeft />Back
+										</Button>
+									
+								</div>
+							</Card>
+							<DetailsPagination
+								hasNextPage={isNextPerson}
+								hasPreviousPage={personId > 1}
+								onNextPage={() => navigate(`/people/${personId - 1}`)}
+								onPreviousPage={() => navigate(`/people/${personId - 1}`)}
+								/>
 						</Col>
 					</Row>
-
 				</Container>
 
 	)

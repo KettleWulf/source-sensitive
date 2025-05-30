@@ -5,7 +5,7 @@ import LoadingSpinner from "../components/spinners/LoadingSpinner";
 import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
 import FilmCard from "../components/cards/FilmCard";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/paginations/Pagination";
 
 
 const FilmsPage = () => {

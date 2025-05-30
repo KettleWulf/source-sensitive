@@ -9,7 +9,7 @@ const Navigation = () => {
 	return (
 		<Navbar bg="dark" variant="dark" expand="md">
 			<Container>
-				<Navbar.Brand as={Link} to="/" className="home-link starwars-font fs-3">A - N e w - W i k i</Navbar.Brand>
+				<Navbar.Brand as={Link} to="/" className="home-link starwars-font fs-3">Source &bull; Sensitive</Navbar.Brand>
 
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">

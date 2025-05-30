@@ -1,12 +1,13 @@
-import Spinner from "react-bootstrap/Spinner"
 
 const LoadingSpinner = () => {
   return (
 	<div className="d-flex justify-content-center mt-5">
-		<Spinner animation="border" role="status">
-		<span className="visually-hidden">Loading...</span>
-		</Spinner>
-	</div>
+			<img
+				src="/loading-spinner.gif"
+				className="w-25"
+			/>
+			<span className="visually-hidden">Loading...</span>
+		</div>
   )
 }
 

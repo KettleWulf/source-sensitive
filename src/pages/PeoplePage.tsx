@@ -1,41 +1,43 @@
 import { useEffect, useState } from "react";
 
 import * as PeopleApi from "../services/people.api";
-import LoadingSpinner from "../components/spinners/LoadingSpinner";
 import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
 
 import type { PeopleListItem, PeopleListResponse } from "../types/SWAPI-types/people.types";
 import PersonCard from "../components/cards/PersonCard";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/paginations/Pagination";
 import { Link, useSearchParams } from "react-router";
 import SearchBar from "../components/SearchBar";
 import BB8Spinner from "../components/spinners/BB8Spinner";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
 
 
 const PeoplePage = () => {
 	const [people, setPeople] = useState<PeopleListItem[] | null>(null);
 	const [fullResponse, setFullResponse] = useState<PeopleListResponse | null>(null);
 	const [error, setError] = useState<string | false>(false);
-	const [isLoading, setIsloading] = useState(false);
+	const [isFetching, setIsFetching] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const page = Number(searchParams.get("page")) || 1;
 	const query = searchParams.get("query") || "";
 
 	const getPeople = async (page: number, query: string) => {
-		setPeople(null);
+
 		setError(false);
-		setIsloading(true);
+		setIsFetching(true);
 
 		try {
 			const res = await PeopleApi.getPeople(page, query);
 			setPeople(res.data);
 			setFullResponse(res);
-			setIsloading(false);
+			setIsFetching(false);
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Can't even get a proper error...");
-			setIsloading(false);
+			setIsFetching(false);
+			setIsLoading(false);
 		}
 
 	}
@@ -53,6 +55,10 @@ const PeoplePage = () => {
 
 	}, [page, query]);
 
+	useEffect(() => {
+		setIsLoading(!people);
+
+	}, [people]);
 
 	
 
@@ -68,6 +74,12 @@ const PeoplePage = () => {
 				currentQuery={query}
 			/>
 
+			{!isLoading && isFetching && <BB8Spinner />}
+
+			{error && <ErrorAlert>{error}</ErrorAlert>}
+
+			{isLoading && <LoadingSpinner />}
+
 			{fullResponse && (
 				<p className="ms-2 mb-1 text-muted small">
 					{query
@@ -76,13 +88,15 @@ const PeoplePage = () => {
 				</p>
 			)}
 			
-			<Row xs={1} sm={2} md={5} className="g-4 min-height-400">
-				{people && people.map(person => (
-				<Col key={person.id}>
-					<PersonCard person={person} />
-				</Col>
-				))}
-			</Row>
+			{people && (
+				<Row xs={1} sm={2} md={4} lg={5} className="g-4 min-height-400">
+					{people.map(person => (
+					<Col key={person.id}>
+						<PersonCard person={person} />
+					</Col>
+					))}
+				</Row>
+			)}
 
 			{fullResponse && <Pagination 
 				hasNextPage={Boolean(fullResponse.next_page_url)}
@@ -91,10 +105,6 @@ const PeoplePage = () => {
 				page={page}
 				totalPages={fullResponse.last_page}
 			/>}
-
-			{isLoading && <BB8Spinner />}
-
-			{error && <ErrorAlert>{error}</ErrorAlert>}
 		</div>
 );
 }

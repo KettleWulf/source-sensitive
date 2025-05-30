@@ -4,13 +4,10 @@ const HomePage = () => {
 
 
 	return (
-		<>
-			<h1>Not Wookie-pedia!</h1>
-
-			{/* <Link to="/search">
-				<Button variant="primary"></Button>
-			</Link> */}
-		</>
+		<div className="text-center">
+			<h1 className="starwars-font mt-5 mb-0">Source &bull; Sensitive</h1>
+			<p className="starwars-font h3 mt-0">A New Wiki</p>
+		</div>
 	)
 }
 

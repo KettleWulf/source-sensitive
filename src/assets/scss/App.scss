@@ -2,6 +2,9 @@ $headings-margin-bottom: 0.75em;
 
 @import "bootstrap/scss/bootstrap";
 
+html, body, #root {
+	height: 100%;
+}
 
 #App {
 	min-height: 100vh;
@@ -59,15 +62,6 @@ body {
 	}
 }
 
-.hover-grow-effect {
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-	&:hover {
-		transform: scale(1.01);
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-	}
-}
-
 .discreet-link {
 	color: inherit;
 	text-decoration: none;
@@ -78,6 +72,22 @@ body {
 		text-decoration: none;
 		}
 }
+
+.underscore-link:hover {
+	text-decoration: underline;
+	font-size: 105%;
+}
+
+.hover-grow-effect {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+	&:hover {
+		transform: scale(1.01);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	}
+}
+
+
 
 .shadow-lightsaber-blue-hover {
 	box-shadow: 0 4px 8px rgba(0, 191, 255, 0.4);
@@ -125,8 +135,7 @@ body {
 
 #bb8-spinner-wrapper {
 	position: fixed;
-	top: 5rem;
-	right: 1rem;
+	right: 3rem;
 	z-index: 9999;
 
 	#bb8-spinner {
@@ -134,4 +143,3 @@ body {
 		height: auto;
 	}
 }
-

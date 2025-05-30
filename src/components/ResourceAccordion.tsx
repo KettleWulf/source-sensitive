@@ -27,7 +27,7 @@ const ResourceAccordion = ({ title, items, basePath, eventKey }: Props) => {
 			<ListGroup variant="flush">
 				{items.map((item) => (
 					<ListGroup.Item key={item.id}>
-						<Link to={`/${basePath}/${item.id}`}>{getLabel(item)}</Link>
+						<Link className="discreet-link underscore-link" to={`/${basePath}/${item.id}`}>{getLabel(item)}</Link>
 					</ListGroup.Item>
 				))}
 			</ListGroup>
