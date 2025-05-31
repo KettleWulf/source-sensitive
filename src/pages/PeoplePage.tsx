@@ -52,9 +52,9 @@ const PeoplePage = () => {
 
 	return (
 		<div className="container mt-3">
-			<h1>
+			<h1 className="mb-3">
 				<Link to={"/" + resourceCategory.toLowerCase()} className="discreet-link">
-					<span className="h2 ms-3">{resourceCategory}</span>
+					<span className="h2 ms-3 mb-0">{resourceCategory}</span>
 				</Link>
 			</h1>
 
