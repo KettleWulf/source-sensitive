@@ -4,7 +4,7 @@ import * as FilmsApi from "../services/films.api";
 import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
 
-import type { FilmsListItem, FilmListResponse } from "../types/SWAPI-types/films.types";
+import type { FilmsListItem, FilmsListResponse } from "../types/SWAPI-types/films.types";
 import FilmCard from "../components/cards/FilmCard";
 import Pagination from "../components/paginations/Pagination";
 import { Link } from "react-router";
@@ -27,30 +27,26 @@ const FilmsPage = () => {
 		isFetching,
 		isLoading,
 		getData
-	} = useGet<FilmsListItem, FilmListResponse>();
-
-	console.log(query, fullResponse);
+	} = useGet<FilmsListItem, FilmsListResponse>();
 
 	const prevQuery = useRef<string | null>(null);
 	const [isNewQuery, setIsNewQuery] = useState(false);
 
 	const resourceCategory = "Films"
 
-
 	useEffect(() => {
 		if (prevQuery.current !== query) {
 			setIsNewQuery(true);
 		}
-		getData(page, query);
+		getData(FilmsApi.getFilms, page, query);
 		prevQuery.current = query
 	}, [page, query, getData]);
 
-		useEffect(() => {
+	useEffect(() => {
 		if (!isFetching) {
 			setIsNewQuery(false);
 		}
 	}, [isFetching]);
-
 
 	return (
 		<div className="container mt-3">
@@ -85,22 +81,22 @@ const FilmsPage = () => {
 			{films && (
 				<Row xs={1} sm={2} md={3} className="g-4 min-height-400">
 					{films.map(film => (
-					<Col key={film.id}>
-						<FilmCard film={film} />
-					</Col>
+						<Col key={film.id}>
+							<FilmCard film={film} />
+						</Col>
 					))}
 				</Row>
 			)}
 
 			{fullResponse && <Pagination 
-				hasNextPage={Boolean(fullResponse.next_page_url)}
-				hasPreviousPage={Boolean(fullResponse.prev_page_url)}
+				hasNextPage={!!fullResponse.next_page_url}
+				hasPreviousPage={!!fullResponse.prev_page_url}
 				onPageChange={handlePageChange}
 				page={page}
 				totalPages={fullResponse.last_page}
 			/>}
 		</div>
-);
+	);
 }
 
-export default FilmsPage
+export default FilmsPage;

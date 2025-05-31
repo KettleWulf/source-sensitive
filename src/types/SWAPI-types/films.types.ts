@@ -40,4 +40,4 @@ export interface FilmsListItem {
 	species_count: number;
 }
 
-export type FilmListResponse = PaginatedResponse<FilmsListItem>
+export type FilmsListResponse = PaginatedResponse<FilmsListItem>

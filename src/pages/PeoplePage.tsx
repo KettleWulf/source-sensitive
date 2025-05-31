@@ -1,66 +1,54 @@
 import { useEffect, useRef, useState } from "react";
-import { Row, Col } from "react-bootstrap";
-import { Link } from "react-router";
 
 import * as PeopleApi from "../services/people.api";
-import type { PeopleListItem, PeopleListResponse } from "../types/SWAPI-types/people.types";
-
+import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
+
+import type { PeopleListItem, PeopleListResponse } from "../types/SWAPI-types/people.types";
 import PersonCard from "../components/cards/PersonCard";
 import Pagination from "../components/paginations/Pagination";
+import { Link } from "react-router";
 import SearchBar from "../components/SearchBar";
 import BB8Spinner from "../components/spinners/BB8Spinner";
 import LoadingSpinner from "../components/spinners/LoadingSpinner";
 
 import { useSearchAndPagination } from "../hooks/useSearchAndPagination";
-
+import { useGet } from "../hooks/useGet";
 
 
 const PeoplePage = () => {
-	const [people, setPeople] = useState<PeopleListItem[] | null>(null);
-	const [fullResponse, setFullResponse] = useState<PeopleListResponse | null>(null);
-	const [error, setError] = useState<string | false>(false);
-	const [isLoading, setIsLoading] = useState(false);
 
 	const { page, query, handlePageChange, handleSearch } = useSearchAndPagination();
-	const resourceCategory = "People";
+	
+	const {
+		data: people,
+		fullResponse,
+		error,
+		isFetching,
+		isLoading,
+		getData
+	} = useGet<PeopleListItem, PeopleListResponse>();
 
 	const prevQuery = useRef<string | null>(null);
 	const [isNewQuery, setIsNewQuery] = useState(false);
 
-	const getPeople = async (page: number, query: string) => {
-		setError(false);
-		setIsLoading(true);
+	const resourceCategory = "People"
 
-
-		try {
-			const res = await PeopleApi.getPeople(page, query);
-			setPeople(res.data);
-			setFullResponse(res);
-			setIsLoading(false);
-		} catch (err) {
-			setError(err instanceof Error ? err.message : "Unexpected error");
-			setIsLoading(false);
-		}
-
-	};
 
 	useEffect(() => {
 		if (prevQuery.current !== query) {
 			setIsNewQuery(true);
 		}
-		
-		getPeople(page, query);
+		getData(PeopleApi.getPeople, page, query);
+		prevQuery.current = query
+	}, [page, query, getData]);
 
-		prevQuery.current = query;
-
-	}, [page, query]);
-
-	useEffect(() => {
-		if (!isLoading) {
+		useEffect(() => {
+		if (!isFetching) {
 			setIsNewQuery(false);
 		}
-	}, [isLoading]);
+	}, [isFetching]);
+
 
 	return (
 		<div className="container mt-3">
@@ -76,43 +64,41 @@ const PeoplePage = () => {
 				currentQuery={query}
 			/>
 
-			{isLoading && fullResponse && <BB8Spinner />}
+			{!isLoading && isFetching && <BB8Spinner />}
 
 			{error && <ErrorAlert>{error}</ErrorAlert>}
 
-			{isLoading && !fullResponse && <LoadingSpinner />}
+			{isLoading && <LoadingSpinner />}
 
 			{fullResponse && (
 				<p className="ms-2 mb-1 text-muted small">
-					{isLoading && isNewQuery
+					{isFetching && isNewQuery
 						? "Searching the Galaxies..."
 						: query
 							? <>Showing {fullResponse.total} result{fullResponse.total > 1 ? "s" : ""} for <em>"{query}"</em></>
 							: `Showing ${fullResponse.from}-${fullResponse.to} of ${fullResponse.total} results.`}
 				</p>
 			)}
-
+			
 			{people && (
 				<Row xs={1} sm={2} md={4} lg={5} className="g-4 min-height-400">
 					{people.map(person => (
-						<Col key={person.id}>
-							<PersonCard person={person} />
-						</Col>
+					<Col key={person.id}>
+						<PersonCard person={person} />
+					</Col>
 					))}
 				</Row>
 			)}
 
-			{fullResponse && (
-				<Pagination 
-					hasNextPage={!!fullResponse.next_page_url}
-					hasPreviousPage={!!fullResponse.prev_page_url}
-					onPageChange={handlePageChange}
-					page={page}
-					totalPages={fullResponse.last_page}
-				/>
-			)}
+			{fullResponse && <Pagination 
+				hasNextPage={Boolean(fullResponse.next_page_url)}
+				hasPreviousPage={Boolean(fullResponse.prev_page_url)}
+				onPageChange={handlePageChange}
+				page={page}
+				totalPages={fullResponse.last_page}
+			/>}
 		</div>
-	);
-};
+);
+}
 
-export default PeoplePage;
+export default PeoplePage

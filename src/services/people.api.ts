@@ -2,7 +2,7 @@ import api from "../lib/api";
 import type { PeopleListResponse, Person } from "../types/SWAPI-types/people.types";
 
 
-export const getPeople = async (page = 1, query?: string) => {
+export const getPeople = async (page = 1, query: string) => {
 	const queryString = query ? `&search=${query}` : "";
 	const res = await api.get<PeopleListResponse>(`/people?page=${page}${queryString}`);
 

@@ -2,8 +2,11 @@ import api from "../lib/api";
 import type { PlanetsListResponse, Planet } from "../types/SWAPI-types/planets.types";
 
 
-export const getPlanets = async () => {
-	const res = await api.get<PlanetsListResponse>("/planets");
+export const getPlanets = async (page = 1, query: string) => {
+	const queryString = query ? `&search=${query}` : "";
+	const res = await api.get<PlanetsListResponse>(`/planets?page=${page}${queryString}`);
+
+	await new Promise(r => setTimeout(r, 1000));
 
 	return res.data
 }
