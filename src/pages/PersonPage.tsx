@@ -69,7 +69,7 @@ const PersonPage = () => {
 					<Row className="justify-content-center">
 						<Col md={8}>
 							<Card 
-								className="shadow-lightsaber-blue">
+								className="shadow-lightsaber-theme-sensitive">
 								<Row className="g-0">
 								<Col md={4}>
 									<Card.Img 

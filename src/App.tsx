@@ -40,7 +40,6 @@ function App() {
 					<Route path="/vehicles" element={<VehiclesPage />} />
 					<Route path="/vehicles/:id" element={<VehiclePage />} />
 
-
 					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</Container>

@@ -1,13 +1,18 @@
-// import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Link, NavLink } from "react-router";
+import { useTheme } from "../hooks/useTheme";
+import { FaEmpire } from "react-icons/fa";
+import { FaJedi } from "react-icons/fa";
 
 const Navigation = () => {
+	const { isDarkMode, toggleTheme } = useTheme();
 
 	return (
-		<Navbar bg="dark" variant="dark" expand="md">
+		<Navbar 
+			className={`navbar-metal text-shadow-mode-${isDarkMode ? "dark" : "light"}`} 
+			expand="md">
 			<Container>
 				<Navbar.Brand as={Link} to="/" className="home-link starwars-font fs-3">Source &bull; Sensitive</Navbar.Brand>
 
@@ -20,6 +25,13 @@ const Navigation = () => {
 						<Nav.Link as={NavLink} to="/species">Species</Nav.Link>
 						<Nav.Link as={NavLink} to="/starships">Starships</Nav.Link>
 						<Nav.Link as={NavLink} to="/vehicles">Vehicles</Nav.Link>
+						<button 
+							className="hidden-background ms-5"
+							aria-label="toggle theme"
+							title={isDarkMode ? "Let the light guide you" : "Join the Dark Side"} 
+							onClick={toggleTheme}>
+								{isDarkMode ? <FaEmpire /> : <FaJedi />}
+						</button>
 					</Nav>
 
 				</Navbar.Collapse>

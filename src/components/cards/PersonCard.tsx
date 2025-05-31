@@ -14,7 +14,7 @@ interface PersonCardProps {
 const PersonCard: React.FC<PersonCardProps> = ({ person }) => {
 	return (
 	<Link to={`/people/${person.id}`} className="text-decoration-none text-dark">
-		<Card className="shadow-lightsaber-blue-hover hover-grow-effect h-100">
+		<Card className="shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
 
 			<Card.Img
 				variant="top"

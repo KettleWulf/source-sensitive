@@ -24,13 +24,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, category, currentQuery 
 	};
 
   return (
-	<Form onSubmit={handleSubmit} className="mb-3 search-bar">
+	<Form onSubmit={handleSubmit} className="mb-3 search-bar-theme-sensitive">
 		<Form.Label htmlFor="searchQuery" className="visually-hidden">Search Query</Form.Label>
 		
 		<InputGroup>
 			<Form.Control
 				id="searchQuery"
-				placeholder={`Enter your search query to peruse the ${category}-catalogue`}
+				placeholder={`Search the ${category}-catalogue`}
 				type="text"
 				value={searchTerm}
 				onChange={(e) => setSearchTerm(e.target.value)}

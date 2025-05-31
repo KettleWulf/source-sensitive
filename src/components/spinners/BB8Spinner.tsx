@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 
 const BB8Spinner = () => {
 
-		const [scrolled, setScrolled] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
+	const [hasMounted, setHasMounted] = useState(false);
 
-		useEffect(() => {
-			const handleScroll = () => {
-				setScrolled(window.scrollY > 100);
-			};
+	useEffect(() => {
+		const handleScroll = () => {
+			setScrolled(window.scrollY > 100);
+		};
 
-			// Kör direkt vid mount
-			handleScroll();
+		handleScroll();
+		setHasMounted(true);
 
-			// Lägg till scroll-lyssnare
-			window.addEventListener("scroll", handleScroll);
-			return () => window.removeEventListener("scroll", handleScroll);
-		}, []);
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
+
+	if (!hasMounted) return null;
 
 	return (
 		<div 
