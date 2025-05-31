@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 import { Link } from 'react-router';
 import type { PlanetsListItem } from '../../types/SWAPI-types/planets.types';
-
+import { getFallbackImage } from '../../utils/getFallbackImage';
 
 interface PlanetCardProps {
 	planet: PlanetsListItem;
@@ -11,25 +11,34 @@ interface PlanetCardProps {
 
 const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
 	return (
-	<Card>
-		<Card.Body>
-			<Card.Title>{planet.name}</Card.Title>
-			<Card.Text>
-				<strong>Climate:</strong> {planet.climate}
-			</Card.Text>
-			<Card.Text>
-				<strong>Terrain:</strong> {planet.terrain}
-			</Card.Text>
-			<Card.Text>
-				<strong>Diameter:</strong> {planet.diameter}
-			</Card.Text>
-			
-			<Link to={`/planets/${planet.id}`}>
-				<Button variant="primary">Read more</Button>
-			</Link>
-		</Card.Body>
-    </Card>
-  );
+		<Link to={`/planets/${planet.id}`} className="text-decoration-none text-dark">
+			<Card className="shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
+				<Card.Img
+					variant="top"
+					src={getFallbackImage(planet.name, "Planets")}
+					alt={planet.name}
+					className="image-ratio"
+				/>
+
+				<Card.Body className="card-body-relative d-flex flex-column">
+					<Card.Title className="starwars-font card-title-clamp mb-2 fs-4">{planet.name}</Card.Title>
+					<Card.Text className="mb-1">
+						<strong>Climate:</strong> {planet.climate}
+					</Card.Text>
+					<Card.Text className="mb-1">
+						<strong>Terrain:</strong> {planet.terrain}
+					</Card.Text>
+					<Card.Text className="mb-5">
+						<strong>Diameter:</strong> {planet.diameter}
+					</Card.Text>
+
+					<div className="card-button-bottom-right mt-3">
+						<Button variant="light" size="sm">Read More</Button>
+					</div>
+				</Card.Body>
+			</Card>
+		</Link>
+	);
 };
 
 export default PlanetCard;

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 import { Link } from 'react-router';
 import type { VehiclesListItem } from '../../types/SWAPI-types/vehicles.types';
-
+import { getFallbackImage } from '../../utils/getFallbackImage';
 
 interface VehicleCardProps {
 	vehicle: VehiclesListItem;
@@ -11,25 +11,34 @@ interface VehicleCardProps {
 
 const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
 	return (
-	<Card>
-		<Card.Body>
-			<Card.Title>{vehicle.name}</Card.Title>
-			<Card.Text>
-				<strong>Language:</strong> {vehicle.manufacturer}
-			</Card.Text>
-			<Card.Text>
-				<strong>Designation:</strong> {vehicle.model}
-			</Card.Text>
-			<Card.Text>
-				<strong>Vehicle Class:</strong> {vehicle.vehicle_class}
-			</Card.Text>
-			
-			<Link to={`/vehicles/${vehicle.id}`}>
-				<Button variant="primary">Read more</Button>
-			</Link>
-		</Card.Body>
-    </Card>
-  );
+		<Link to={`/vehicles/${vehicle.id}`} className="text-decoration-none text-dark">
+			<Card className="shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
+				<Card.Img
+					variant="top"
+					src={getFallbackImage(vehicle.name, "Vehicles")}
+					alt={vehicle.name}
+					className="image-ratio"
+				/>
+
+				<Card.Body className="card-body-relative d-flex flex-column">
+					<Card.Title className="starwars-font card-title-clamp mb-2 fs-4">{vehicle.name}</Card.Title>
+					<Card.Text className="mb-1">
+						<strong>Manufacturer:</strong> {vehicle.manufacturer}
+					</Card.Text>
+					<Card.Text className="mb-1">
+						<strong>Model:</strong> {vehicle.model}
+					</Card.Text>
+					<Card.Text className="mb-5">
+						<strong>Class:</strong> {vehicle.vehicle_class}
+					</Card.Text>
+
+					<div className="card-button-bottom-right mt-3">
+						<Button variant="light" size="sm">Read More</Button>
+					</div>
+				</Card.Body>
+			</Card>
+		</Link>
+	);
 };
 
 export default VehicleCard;
