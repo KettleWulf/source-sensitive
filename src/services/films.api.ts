@@ -1,8 +1,9 @@
 import api from "../lib/api";
 import type { Film, FilmListResponse } from "../types/SWAPI-types/films.types";
 
-export const getFilms = async (page = 1) => {
-	const res = await api.get<FilmListResponse>("/films?page=" + page);
+export const getFilms = async (page = 1, query?: string) => {
+	const queryString = query ? `&search=${query}` : "";
+	const res = await api.get<FilmListResponse>(`/people?page=${page}${queryString}`);
 
 	return res.data
 }

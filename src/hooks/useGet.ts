@@ -9,7 +9,7 @@ export const useGet = <TData, TResponse>() => {
 	const [isFetching, setIsFetching] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const getData = useCallback(
+	const getData = 
 		async (
 			getFn: (page: number, query: string) => Promise<PaginatedResponse<TData>>,
 			page: number,
@@ -28,9 +28,7 @@ export const useGet = <TData, TResponse>() => {
 				setIsFetching(false);
 				setIsLoading(false);
 			}
-		},
-		[]
-	);
+		};
 
 	useEffect(() => {
 		setIsLoading(!data);

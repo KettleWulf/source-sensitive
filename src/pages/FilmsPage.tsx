@@ -1,78 +1,105 @@
-import { useEffect, useState } from "react";
-import type { FilmListResponse, FilmsListItem } from "../types/SWAPI-types/films.types";
-import * as FilmsAPI from "../services/films.api";
-import LoadingSpinner from "../components/spinners/LoadingSpinner";
+import { useEffect, useRef, useState } from "react";
+
+import * as FilmsApi from "../services/films.api";
 import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
+
+import type { FilmsListItem, FilmListResponse } from "../types/SWAPI-types/films.types";
 import FilmCard from "../components/cards/FilmCard";
 import Pagination from "../components/paginations/Pagination";
+import { Link } from "react-router";
+import SearchBar from "../components/SearchBar";
+import BB8Spinner from "../components/spinners/BB8Spinner";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
+
+import { useSearchAndPagination } from "../hooks/useSearchAndPagination";
+import { useGet } from "../hooks/useGet";
 
 
 const FilmsPage = () => {
-	const [films, setFilms] = useState<FilmsListItem[] | null>(null);
-	const [fullResponse, setFullResponse] = useState<FilmListResponse | null>(null);
-	const [error, setError] = useState<string | false>(false);
-	const [isLoading, setIsloading] = useState(false);
 
-	// const {searchParams, setSearchParams} = useSearchParams();
-	const [page, setPage] = useState(1);
+	const { page, query, handlePageChange, handleSearch } = useSearchAndPagination();
+	
+	const {
+		data: films,
+		fullResponse,
+		error,
+		isFetching,
+		isLoading,
+		getData
+	} = useGet<FilmsListItem, FilmListResponse>();
 
-	const getFilms = async (page: number) => {
-		setFilms(null);
-		setError(false);
-		setIsloading(true);
+	console.log(query, fullResponse);
 
-		try {
-			const res = await FilmsAPI.getFilms(page);
-			setFilms(res.data);
-			setFullResponse(res)
-			setIsloading(false);
-		} catch (err) {
-			setError(err instanceof Error ? err.message : "Can't even get a proper error...");
-			setIsloading(false);
-		}
+	const prevQuery = useRef<string | null>(null);
+	const [isNewQuery, setIsNewQuery] = useState(false);
 
-	}
+	const resourceCategory = "Films"
+
 
 	useEffect(() => {
-		getFilms(page)
-	}, [page])
+		if (prevQuery.current !== query) {
+			setIsNewQuery(true);
+		}
+		getData(page, query);
+		prevQuery.current = query
+	}, [page, query, getData]);
 
-	if (isLoading) {
-		return <LoadingSpinner />;
-	}
+		useEffect(() => {
+		if (!isFetching) {
+			setIsNewQuery(false);
+		}
+	}, [isFetching]);
 
-	if (error) {
-		return <ErrorAlert>{error}</ErrorAlert>
-	}
-	
 
 	return (
-		
-		<div className="container">
-			<h1>Films</h1>
+		<div className="container mt-3">
+			<h1 className="mb-3">
+				<Link to={"/" + resourceCategory.toLowerCase()} className="discreet-link">
+					<span className="h2 ms-3 mb-0">{resourceCategory}</span>
+				</Link>
+			</h1>
 
-			{fullResponse && <p>Showing result {fullResponse.from} to {fullResponse.to} of {fullResponse.total} results. </p>}
-			<Row xs={1} sm={2} md={3} className="g-4">
-				{films && films.map(film => (
-				<Col key={film.id}>
-					<FilmCard film={film} />
-				</Col>
-				))}
-			</Row>
+			<SearchBar 
+				onSearch={handleSearch} 
+				category={resourceCategory}
+				currentQuery={query}
+			/>
+
+			{!isLoading && isFetching && <BB8Spinner />}
+
+			{error && <ErrorAlert>{error}</ErrorAlert>}
+
+			{isLoading && <LoadingSpinner />}
+
+			{fullResponse && (
+				<p className="ms-2 mb-1 text-muted small">
+					{isFetching && isNewQuery
+						? "Searching the Galaxies..."
+						: query
+							? <>Showing {fullResponse.total} result{fullResponse.total > 1 ? "s" : ""} for <em>"{query}"</em></>
+							: `Showing ${fullResponse.from}-${fullResponse.to} of ${fullResponse.total} results.`}
+				</p>
+			)}
+			
+			{films && (
+				<Row xs={1} sm={2} md={3} className="g-4 min-height-400">
+					{films.map(film => (
+					<Col key={film.id}>
+						<FilmCard film={film} />
+					</Col>
+					))}
+				</Row>
+			)}
 
 			{fullResponse && <Pagination 
-				hasNextPage={fullResponse.current_page !== fullResponse.last_page}
-				onNextPage={() => setPage(prevValue => prevValue + 1)}
-				hasPreviousPage={fullResponse.current_page !== 1}
-				onPreviousPage={() => setPage(prevValue => prevValue - 1)}
-				onFirstPage={() => setPage(1)}
-				onLastPage={() => setPage(fullResponse.last_page)}
+				hasNextPage={Boolean(fullResponse.next_page_url)}
+				hasPreviousPage={Boolean(fullResponse.prev_page_url)}
+				onPageChange={handlePageChange}
 				page={page}
 				totalPages={fullResponse.last_page}
 			/>}
 		</div>
-		
 );
 }
 
