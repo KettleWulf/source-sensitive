@@ -19,6 +19,7 @@ import { useGet } from "../hooks/useGet";
 const PeoplePage = () => {
 
 	const { page, query, handlePageChange, handleSearch } = useSearchAndPagination();
+	
 	const {
 	data: people,
 	fullResponse,
