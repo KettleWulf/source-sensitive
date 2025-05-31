@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import * as PeopleApi from "../services/people.api";
 import { Row, Col } from 'react-bootstrap';
@@ -21,27 +21,42 @@ const PeoplePage = () => {
 	const { page, query, handlePageChange, handleSearch } = useSearchAndPagination();
 	
 	const {
-	data: people,
-	fullResponse,
-	error,
-	isFetching,
-	isLoading,
-	getData
-} = useGet<PeopleListItem, PeopleListResponse>();
+		data: people,
+		fullResponse,
+		error,
+		isFetching,
+		isLoading,
+		getData
+	} = useGet<PeopleListItem, PeopleListResponse>();
+
+	const prevQuery = useRef<string | null>(null);
+	const [isNewQuery, setIsNewQuery] = useState(false);
 
 	const resourceCategory = "People"
 
+
 	useEffect(() => {
+		if (prevQuery.current !== query) {
+			setIsNewQuery(true);
+		}
 		getData(PeopleApi.getPeople, page, query);
+		prevQuery.current = query
 	}, [page, query, getData]);
 
+		useEffect(() => {
+		if (!isFetching) {
+			setIsNewQuery(false);
+		}
+	}, [isFetching]);
 
 
 	return (
 		<div className="container mt-3">
-			<Link to={"/" + resourceCategory.toLowerCase()} className="discreet-link">
-				<h1 className="h2">{resourceCategory}</h1>
-			</Link>
+			<h1>
+				<Link to={"/" + resourceCategory.toLowerCase()} className="discreet-link">
+					<span className="h2 ms-3">{resourceCategory}</span>
+				</Link>
+			</h1>
 
 			<SearchBar 
 				onSearch={handleSearch} 
@@ -57,9 +72,11 @@ const PeoplePage = () => {
 
 			{fullResponse && (
 				<p className="ms-2 mb-1 text-muted small">
-					{query
-						? <>Showing {fullResponse.total} results for <em>"{query}"</em></>
-						: `Showing ${fullResponse.from}-${fullResponse.to} of ${fullResponse.total} results.`}
+					{isFetching && isNewQuery
+						? "Searching the Galaxies..."
+						: query
+							? <>Showing {fullResponse.total} result{fullResponse.total > 1 ? "s" : ""} for <em>"{query}"</em></>
+							: `Showing ${fullResponse.from}-${fullResponse.to} of ${fullResponse.total} results.`}
 				</p>
 			)}
 			

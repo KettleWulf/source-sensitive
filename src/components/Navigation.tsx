@@ -28,7 +28,7 @@ const Navigation = () => {
 						<button 
 							className="hidden-background ms-5"
 							aria-label="toggle theme"
-							title={isDarkMode ? "Let the light guide you" : "Join the Dark Side"} 
+							title={isDarkMode ? "Let the Light guide you" : "Join the Dark Side"} 
 							onClick={toggleTheme}>
 								{isDarkMode ? <FaEmpire /> : <FaJedi />}
 						</button>
