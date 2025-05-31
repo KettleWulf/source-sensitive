@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import * as PeopleApi from "../services/people.api";
 import { Row, Col } from 'react-bootstrap';
@@ -13,47 +13,28 @@ import BB8Spinner from "../components/spinners/BB8Spinner";
 import LoadingSpinner from "../components/spinners/LoadingSpinner";
 
 import { useSearchAndPagination } from "../hooks/useSearchAndPagination";
+import { useGet } from "../hooks/useGet";
 
 
 const PeoplePage = () => {
-	const [people, setPeople] = useState<PeopleListItem[] | null>(null);
-	const [fullResponse, setFullResponse] = useState<PeopleListResponse | null>(null);
-	const [error, setError] = useState<string | false>(false);
-	const [isFetching, setIsFetching] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
 
 	const { page, query, handlePageChange, handleSearch } = useSearchAndPagination();
+	const {
+	data: people,
+	fullResponse,
+	error,
+	isFetching,
+	isLoading,
+	getData
+} = useGet<PeopleListItem, PeopleListResponse>();
 
 	const resourceCategory = "People"
 
-	const getPeople = async (page: number, query: string) => {
-
-		setError(false);
-		setIsFetching(true);
-
-		try {
-			const res = await PeopleApi.getPeople(page, query);
-			setPeople(res.data);
-			setFullResponse(res);
-			setIsFetching(false);
-		} catch (err) {
-			setError(err instanceof Error ? err.message : "Can't even get a proper error...");
-			setIsFetching(false);
-			setIsLoading(false);
-		}
-
-	}
-
-
 	useEffect(() => {
-		getPeople(page, query);
-	}, [page, query]);
+		getData(PeopleApi.getPeople, page, query);
+	}, [page, query, getData]);
 
-	useEffect(() => {
-		setIsLoading(!people);
-	}, [people]);
 
-	
 
 	return (
 		<div className="container mt-3">

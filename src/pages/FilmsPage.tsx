@@ -34,8 +34,6 @@ const FilmsPage = () => {
 
 	}
 
-
-
 	useEffect(() => {
 		getFilms(page)
 	}, [page])
