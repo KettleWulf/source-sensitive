@@ -1,13 +1,16 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
 import { Link } from 'react-router';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 import type { SpeciesListItem } from '../../types/SWAPI-types/species.types';
+
 import { getFallbackImage } from '../../utils/getFallbackImage';
+
 
 interface SpeciesCardProps {
 	species: SpeciesListItem;
 }
+
 
 const SpeciesCard: React.FC<SpeciesCardProps> = ({ species }) => {
 	return (

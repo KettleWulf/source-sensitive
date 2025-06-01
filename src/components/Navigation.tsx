@@ -1,8 +1,9 @@
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import { Link, NavLink } from "react-router";
 import { useTheme } from "../hooks/useTheme";
+import { Link, NavLink } from "react-router";
+
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 import { FaEmpire } from "react-icons/fa";
 import { FaGalacticRepublic } from "react-icons/fa";
 
@@ -27,7 +28,7 @@ const Navigation = () => {
 						<Nav.Link as={NavLink} to="/starships">Starships</Nav.Link>
 						<Nav.Link as={NavLink} to="/vehicles">Vehicles</Nav.Link>
 						<button 
-							className="round-icon-button ms-5 fs-2"
+							className="round-icon-button ms-5 mb-1 fs-2"
 							aria-label="toggle theme"
 							title={isDarkMode ? "Let the Light guide you" : "Join the Dark Side"} 
 							onClick={toggleTheme}>

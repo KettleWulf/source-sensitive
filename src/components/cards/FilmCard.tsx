@@ -1,13 +1,16 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
 import { Link } from 'react-router';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 import type { FilmsListItem } from '../../types/SWAPI-types/films.types';
+
 import { getFallbackImage } from '../../utils/getFallbackImage';
+
 
 interface FilmCardProps {
 	film: FilmsListItem;
 }
+
 
 const FilmCard: React.FC<FilmCardProps> = ({ film }) => {
 	return (

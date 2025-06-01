@@ -1,13 +1,16 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
 import { Link } from 'react-router';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 import type { StarshipsListItem } from '../../types/SWAPI-types/starships.types';
+
 import { getFallbackImage } from '../../utils/getFallbackImage';
+
 
 interface StarshipCardProps {
 	starship: StarshipsListItem;
 }
+
 
 const StarshipCard: React.FC<StarshipCardProps> = ({ starship }) => {
 	return (

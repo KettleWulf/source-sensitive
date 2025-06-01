@@ -1,13 +1,16 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
 import { Link } from 'react-router';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 import type { PlanetsListItem } from '../../types/SWAPI-types/planets.types';
+
 import { getFallbackImage } from '../../utils/getFallbackImage';
+
 
 interface PlanetCardProps {
 	planet: PlanetsListItem;
 }
+
 
 const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
 	return (

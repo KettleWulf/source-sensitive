@@ -5,6 +5,7 @@ import type { PaginatedResponse } from "../types/Common-types/paginated-response
 export const useGet = <TData, TResponse>() => {
 	const [data, setData] = useState<TData[] | null>(null);
 	const [fullResponse, setFullResponse] = useState<TResponse | null>(null);
+
 	const [error, setError] = useState<string | false>(false);
 	const [isFetching, setIsFetching] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -17,25 +18,28 @@ export const useGet = <TData, TResponse>() => {
 		) => {
 			setError(false);
 			setIsFetching(true);
+
 			try {
 				const res = await getFn(page, query);
 				console.log("Fetchin...")
 				setData(res.data);
 				setFullResponse(res as TResponse); // förlåt..
+
 			} catch (err) {
 				setError(err instanceof Error ? err.message : "Unexpected error");
-			} finally {
-				setIsFetching(false);
-				setIsLoading(false);
 			}
-		},
-		[]
-	);
+
+			setIsFetching(false);
+			setIsLoading(false);
+			
+			},
+		[]);
 
 	useEffect(() => {
 		setIsLoading(!data);
 	}, [data]);
 
+	
 	return {
 		data,
 		fullResponse,

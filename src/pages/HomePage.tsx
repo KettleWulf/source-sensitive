@@ -4,7 +4,6 @@ import MoodVideo from "../components/videos/MoodVideo"
 
 const HomePage = () => {
 
-
 	return (
 		<>
 		<div className="text-center">

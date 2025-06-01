@@ -5,7 +5,8 @@ import { Row, Col } from 'react-bootstrap';
 import ErrorAlert from "../components/ErrorAlert";
 
 import type { StarshipsListItem, StarshipsListResponse } from "../types/SWAPI-types/starships.types";
-import StarshipCard from "../components/cards/StarShipCard";
+import StarshipCard from "../components/cards/StarshipCard";
+
 import Pagination from "../components/paginations/Pagination";
 import { Link } from "react-router";
 import SearchBar from "../components/SearchBar";

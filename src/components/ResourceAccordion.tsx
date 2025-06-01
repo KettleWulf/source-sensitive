@@ -1,6 +1,8 @@
-import { Accordion, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router';
 import type { NamedReference, TitledReference } from '../types/Common-types/reference.types';
+import { Link } from 'react-router';
+
+import Accordion from "react-bootstrap/Accordion";
+import ListGroup from "react-bootstrap/ListGroup";
 
 
 interface Props {

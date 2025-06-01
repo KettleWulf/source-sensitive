@@ -1,15 +1,16 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-
 import { Link } from 'react-router';
-import type { PeopleListItem } from '../../types/SWAPI-types/people.types';
-import { getFallbackImage } from '../../utils/getFallbackImage';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
+import type { PeopleListItem } from '../../types/SWAPI-types/people.types';
+
+import { getFallbackImage } from '../../utils/getFallbackImage';
 
 
 interface PersonCardProps {
 	person: PeopleListItem;
 }
+
 
 const PersonCard: React.FC<PersonCardProps> = ({ person }) => {
 	return (

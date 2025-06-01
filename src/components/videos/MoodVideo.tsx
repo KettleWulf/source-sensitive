@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card } from "react-bootstrap";
 
+
 const MoodVideo = () => {
 	const [showStill, setShowStill] = useState(false);
 
@@ -9,24 +10,22 @@ const MoodVideo = () => {
 	};
 
 	return (
-		<Card className="video-floating m-auto overflow-hidden rounded" style={{ maxWidth: 500 }}>
-			{!showStill ? (
-				<video
-					src="/videos/mood-starwars.mp4"
-					autoPlay
-					muted
-					playsInline
-					onEnded={handleVideoEnd}
-					className="w-100 d-block"
-				/>
-			) : (
-				<img
-					src="/images/mood-starwars-still3.jpg"
-					alt="Intro still"
-					className="w-100 d-block"
-				/>
-			)}
-		</Card>
+		<Card className="video-floating position-relative m-auto overflow-hidden rounded">
+	<video
+		src="/videos/mood-starwars.mp4"
+		autoPlay
+		muted
+		playsInline
+		onEnded={handleVideoEnd}
+		className="w-100 d-block"
+	/>
+
+	<img
+		src="/images/mood-starwars-still3.jpg"
+		alt="Intro still"
+		className={`video-still w-100 d-block ${showStill ? "fade-in" : ""}`}
+	/>
+</Card>
 	);
 };
 

@@ -1,6 +1,5 @@
+import type { NamedReference, TitledReference } from "../Common-types/reference.types";
 import type { PaginatedResponse } from "../Common-types/paginated-response.types";
-import type { TitledReference } from "../Common-types/reference.types";
-import type { Person } from "./people.types";
 
 
 export interface Planet {
@@ -16,7 +15,7 @@ export interface Planet {
 	created: string;
 	edited: string;
 
-	residents: Resident[];
+	residents: NamedReference[];
 	films: TitledReference[];
 }
 
@@ -39,4 +38,3 @@ export interface PlanetsListItem {
 
 export type PlanetsListResponse = PaginatedResponse<PlanetsListItem>
 
-type Resident = Omit<Person, "homeworld" | "films" | "species" | "starships" | "vehicles">;

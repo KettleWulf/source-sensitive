@@ -1,5 +1,5 @@
-import type { PaginatedResponse } from "../Common-types/paginated-response.types";
 import type { NamedReference, TitledReference } from "../Common-types/reference.types";
+import type { PaginatedResponse } from "../Common-types/paginated-response.types";
 
 
 export interface Person {

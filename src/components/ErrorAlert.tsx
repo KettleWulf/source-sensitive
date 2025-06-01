@@ -1,7 +1,10 @@
-import { Button, Container } from "react-bootstrap";
+import { useNavigate } from "react-router";
+
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
-import { useNavigate } from "react-router";
+
 
 interface ErrorAlertProps {
 	children: React.ReactNode;

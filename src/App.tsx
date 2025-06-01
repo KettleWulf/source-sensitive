@@ -1,9 +1,12 @@
-// import { useState } from 'react'
-import Container from 'react-bootstrap/Container'
 import "./assets/scss/App.scss";
-import Navigation from './components/Navigation'
-import HomePage from './pages/HomePage'
+
 import { Route, Routes } from 'react-router'
+
+import Container from 'react-bootstrap/Container'
+import Navigation from './components/Navigation'
+import Footer from './components/Footer';
+
+import HomePage from './pages/HomePage'
 import FilmsPage from './pages/FilmsPage';
 import PeoplePage from './pages/PeoplePage';
 import PlanetsPage from './pages/PlanetsPage';
@@ -17,7 +20,6 @@ import SpeciesDetailsPage from './pages/SpeciesDetailsPage';
 import StarshipDetailsPage from './pages/StarshipDetailsPage';
 import VehicleDetailsPage from './pages/VehicleDetailsPage';
 import NotFoundPage from './pages/NotFoundPage';
-import Footer from './components/Footer';
 
 function App() {
 	return (

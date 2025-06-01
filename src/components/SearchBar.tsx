@@ -1,7 +1,9 @@
-import Form from "react-bootstrap/Form"
-import Button from "react-bootstrap/Button"
-import InputGroup from "react-bootstrap/InputGroup"
 import { useEffect, useState } from "react";
+
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
+import InputGroup from "react-bootstrap/InputGroup"
+
 
 interface SearchBarProps {
 	onSearch: (query: string) => void;
@@ -13,15 +15,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, category, currentQuery 
 
 	const [ searchTerm, setSearchTerm ] = useState("");
 
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		onSearch(searchTerm.trim());
+	};
+
 	useEffect(() => {
 		setSearchTerm(currentQuery);
 	}, [currentQuery]);
 
 	
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		onSearch(searchTerm.trim());
-	};
 
   return (
 	<Form onSubmit={handleSubmit} className="mb-3 search-bar-theme-sensitive">

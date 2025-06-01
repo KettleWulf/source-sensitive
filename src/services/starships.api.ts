@@ -6,7 +6,7 @@ export const getStarships = async (page = 1, query: string) => {
 	const queryString = query ? `&search=${query}` : "";
 	const res = await api.get<StarshipsListResponse>(`/starships?page=${page}${queryString}`);
 
-	await new Promise(r => setTimeout(r, 1000));
+	await new Promise(r => setTimeout(r, 600));
 
 	return res.data
 }
@@ -14,7 +14,7 @@ export const getStarships = async (page = 1, query: string) => {
 export const getStarship = async (id: number) => {
 	const res = await api.get<Starship>("/starships/" + id);
 
-	await new Promise(r => setTimeout(r, 600));
+	await new Promise(r => setTimeout(r, 200));
 
 	return res.data
 }

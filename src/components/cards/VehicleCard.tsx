@@ -1,13 +1,16 @@
+import { Link } from 'react-router';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-import { Link } from 'react-router';
 import type { VehiclesListItem } from '../../types/SWAPI-types/vehicles.types';
+
 import { getFallbackImage } from '../../utils/getFallbackImage';
+
 
 interface VehicleCardProps {
 	vehicle: VehiclesListItem;
 }
+
 
 const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
 	return (
