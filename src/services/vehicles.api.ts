@@ -4,7 +4,7 @@ import type { VehiclesListResponse, Vehicle } from "../types/SWAPI-types/vehicle
 
 export const getVehicles = async (page = 1, query: string) => {
 	const queryString = query ? `&search=${query}` : "";
-	const res = await api.get<VehiclesListResponse>(`/starships?page=${page}${queryString}`);
+	const res = await api.get<VehiclesListResponse>(`/vehicles?page=${page}${queryString}`);
 
 	await new Promise(r => setTimeout(r, 1000));
 

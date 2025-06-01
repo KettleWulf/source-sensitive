@@ -10,12 +10,12 @@ import PlanetsPage from './pages/PlanetsPage';
 import SpeciesPage from './pages/SpeciesPage';
 import VehiclesPage from './pages/VehiclesPage';
 import StarshipsPage from './pages/StarshipsPage';
-import FilmPage from './pages/FilmPage';
-import PersonPage from './pages/PersonPage';
-import PlanetPage from './pages/PlanetPage';
-import SingleSpeciesPage from './pages/SingleSpeciesPage';
-import StarshipPage from './pages/StarshipPage';
-import VehiclePage from './pages/VehiclePage';
+import FilmDetailsPage from './pages/FilmDetailsPage';
+import PersonDetailsPage from './pages/PersonDetailsPage';
+import PlanetDetailsPage from './pages/PlanetDetailsPage';
+import SpeciesDetailsPage from './pages/SpeciesDetailsPage';
+import StarshipDetailsPage from './pages/StarshipDetailsPage';
+import VehicleDetailsPage from './pages/VehicleDetailsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -28,17 +28,17 @@ function App() {
 				<Routes>
 					<Route path="/" element={<HomePage />} />
 					<Route path="/films" element={<FilmsPage />} />
-					<Route path="/films/:id" element={<FilmPage />} />
+					<Route path="/films/:id" element={<FilmDetailsPage />} />
 					<Route path="/people" element={<PeoplePage />} />
-					<Route path="/people/:id" element={<PersonPage/>} />
+					<Route path="/people/:id" element={<PersonDetailsPage/>} />
 					<Route path="/planets" element={<PlanetsPage />} />
-					<Route path="/planets/:id" element={<PlanetPage />} />
+					<Route path="/planets/:id" element={<PlanetDetailsPage />} />
 					<Route path="/species" element={<SpeciesPage />} />
-					<Route path="/species/:id" element={<SingleSpeciesPage />} />
+					<Route path="/species/:id" element={<SpeciesDetailsPage />} />
 					<Route path="/starships" element={<StarshipsPage />} />
-					<Route path="/starships/:id" element={<StarshipPage />} />
+					<Route path="/starships/:id" element={<StarshipDetailsPage />} />
 					<Route path="/vehicles" element={<VehiclesPage />} />
-					<Route path="/vehicles/:id" element={<VehiclePage />} />
+					<Route path="/vehicles/:id" element={<VehicleDetailsPage />} />
 
 					<Route path="*" element={<NotFoundPage />} />
 				</Routes>

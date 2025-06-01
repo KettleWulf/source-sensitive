@@ -14,10 +14,13 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
 		<Link to={`/vehicles/${vehicle.id}`} className="text-decoration-none text-dark">
 			<Card className="shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
 				<Card.Img
+					className="image-ratio"
 					variant="top"
 					src={getFallbackImage(vehicle.name, "Vehicles")}
 					alt={vehicle.name}
-					className="image-ratio"
+					onError={(e) => {
+						(e.target as HTMLImageElement).src = '/images/unknown.png';
+					}}
 				/>
 
 				<Card.Body className="card-body-relative d-flex flex-column">

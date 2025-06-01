@@ -14,10 +14,13 @@ const StarshipCard: React.FC<StarshipCardProps> = ({ starship }) => {
 		<Link to={`/starships/${starship.id}`} className="text-decoration-none text-dark">
 			<Card className="shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
 				<Card.Img
+					className="image-ratio"
 					variant="top"
 					src={getFallbackImage(starship.name, "Starships")}
 					alt={starship.name}
-					className="image-ratio"
+					onError={(e) => {
+						(e.target as HTMLImageElement).src = '/images/unknown.png';
+					}}
 				/>
 
 				<Card.Body className="card-body-relative d-flex flex-column">

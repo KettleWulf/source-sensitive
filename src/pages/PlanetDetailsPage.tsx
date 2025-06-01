@@ -8,7 +8,7 @@ import ResourceAccordion from "../components/ResourceAccordion";
 import type { Planet } from "../types/SWAPI-types/planets.types";
 
 
-const PlanetPage = () => {
+const PlanetDetailsPage = () => {
 	const [planet, setPlanet] = useState<Planet | null>(null);
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
@@ -98,4 +98,4 @@ const PlanetPage = () => {
 	)
 }
 
-export default PlanetPage
+export default PlanetDetailsPage

@@ -14,10 +14,13 @@ const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
 		<Link to={`/planets/${planet.id}`} className="text-decoration-none text-dark">
 			<Card className="shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
 				<Card.Img
+					className="image-ratio"
 					variant="top"
 					src={getFallbackImage(planet.name, "Planets")}
 					alt={planet.name}
-					className="image-ratio"
+					onError={(e) => {
+						(e.target as HTMLImageElement).src = '/images/unknown.png';
+					}}
 				/>
 
 				<Card.Body className="card-body-relative d-flex flex-column">

@@ -8,7 +8,7 @@ import ResourceAccordion from "../components/ResourceAccordion";
 import type { Species } from "../types/SWAPI-types/species.types";
 
 
-const SingleSpeciesPage = () => {
+const SpeciesDetailsPage = () => {
 	const [species, setSpecies] = useState<Species | null>(null);
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
@@ -100,4 +100,4 @@ const SingleSpeciesPage = () => {
 	)
 }
 
-export default SingleSpeciesPage
+export default SpeciesDetailsPage

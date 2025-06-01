@@ -1,6 +1,7 @@
 export const getFallbackImage = (name: string, category: string) => {
-  const fileName = encodeURIComponent(name) + ".png";
-  return `/images/${category + "Images"}/${fileName}`;
+	const safeName = name.replace(/[/\\:*?"<>|]/g, '-');
+	const fileName = encodeURIComponent(safeName) + ".png";
+	return `/images/${category + "Images"}/${fileName}`;
 };
 
 

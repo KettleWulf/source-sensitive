@@ -8,7 +8,7 @@ import { Container, Row, Col, Card, ListGroup, Accordion } from "react-bootstrap
 import ResourceAccordion from "../components/ResourceAccordion";
 
 
-const FilmPage = () => {
+const FilmDetailsPage = () => {
 	const [film, setFilm] = useState<Film | null>(null);
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
@@ -117,4 +117,4 @@ const FilmPage = () => {
 	)
 }
 
-export default FilmPage
+export default FilmDetailsPage

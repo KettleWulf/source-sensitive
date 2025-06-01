@@ -12,7 +12,7 @@ import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import DetailsPagination from "../components/paginations/DetailsPagination";
 
 
-const PersonPage = () => {
+const PersonDetailsPage = () => {
 	const [person, setPerson] = useState<Person | null>(null);
 	const [error, setError] = useState<string | false>(false);
 	const [isLoading, setIsloading] = useState(false);
@@ -25,20 +25,20 @@ const PersonPage = () => {
 
 
 	const getPerson = async (id: number) => {
-			setPerson(null);
-			setError(false);
-			setIsloading(true);
-	
-			try {
-				const data = await PeopleAPI.getPerson(id);
-				setPerson(data);
-				setIsloading(false);
-			} catch (err) {
-				setError(err instanceof Error ? err.message : "Can't even get a proper error...");
-				setIsloading(false);
-			}
-	
+		setPerson(null);
+		setError(false);
+		setIsloading(true);
+
+		try {
+			const data = await PeopleAPI.getPerson(id);
+			setPerson(data);
+			setIsloading(false);
+		} catch (err) {
+			setError(err instanceof Error ? err.message : "Can't even get a proper error...");
+			setIsloading(false);
 		}
+
+	}
 
 	const getNextPerson = async (id: number) => {
 		
@@ -53,7 +53,7 @@ const PersonPage = () => {
 	useEffect(() => {
 		getPerson(personId)
 		getNextPerson(personId)
-	}, [personId])
+	}, [personId]);
 
 	if (isLoading) {
 		return <LoadingSpinner />;
@@ -121,4 +121,4 @@ const PersonPage = () => {
 	)
 )}
 
-export default PersonPage
+export default PersonDetailsPage
