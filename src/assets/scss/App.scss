@@ -125,6 +125,32 @@ body {
 	}
 }
 
+.card-glass-static {
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+	border-radius: 0.5rem;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+	[data-bs-theme="light"] & {
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.808), rgba(185, 185, 185, 0.4));
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	[data-bs-theme="dark"] & {
+		background: linear-gradient(135deg, rgba(68, 68, 68, 0.6), rgba(17, 17, 17, 0.4));
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+	}
+}
+
+.transparent {
+	background: none;
+}
+
 .hover-grow-effect {
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 

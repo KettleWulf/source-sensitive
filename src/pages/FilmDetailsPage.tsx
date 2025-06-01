@@ -76,7 +76,7 @@ const FilmDetailsPage = () => {
 				<Container className="my-5">
 					<Row className="justify-content-center">
 						<Col md={8}>
-							<Card className="shadow-lightsaber-theme-sensitive">
+							<Card className="card-glass-static shadow-lightsaber-theme-sensitive">
 								<Row className="g-0">
 									<Col md={4}>
 										<Card.Img
@@ -97,9 +97,9 @@ const FilmDetailsPage = () => {
 												<em>{film.opening_crawl}</em>
 											</Card.Text>
 											<ListGroup variant="flush" className="mt-3">
-												<ListGroup.Item><strong>Director:</strong> {film.director}</ListGroup.Item>
-												<ListGroup.Item><strong>Producer:</strong> {film.producer}</ListGroup.Item>
-												<ListGroup.Item><strong>Release date:</strong> {film.release_date}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Director:</strong> {film.director}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Producer:</strong> {film.producer}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Release date:</strong> {film.release_date}</ListGroup.Item>
 											</ListGroup>
 											<Accordion className="mt-4">
 												<ResourceAccordion title="Characters" items={film.characters} basePath="people" eventKey="0" />

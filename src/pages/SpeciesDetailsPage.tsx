@@ -78,7 +78,7 @@ const SpeciesDetailsPage = () => {
 				<Container className="my-5">
 					<Row className="justify-content-center">
 						<Col md={8}>
-							<Card className="shadow-lightsaber-theme-sensitive">
+							<Card className="card-glass-static shadow-lightsaber-theme-sensitive">
 								<Row className="g-0">
 									<Col md={4}>
 										<Card.Img
@@ -94,12 +94,12 @@ const SpeciesDetailsPage = () => {
 										<Card.Body className="mb-5">
 											<Card.Title as="h1" className="starwars-font">{species.name}</Card.Title>
 											<ListGroup variant="flush" className="mt-3">
-												<ListGroup.Item><strong>Homeworld:</strong> {species.homeworld ? species.homeworld.name : 'Unspecified'}</ListGroup.Item>
-												<ListGroup.Item><strong>Language:</strong> {species.language}</ListGroup.Item>
-												<ListGroup.Item><strong>Designation:</strong> {species.designation}</ListGroup.Item>
-												<ListGroup.Item><strong>Classification:</strong> {species.classification}</ListGroup.Item>
-												<ListGroup.Item><strong>Average Life Span:</strong> {species.average_lifespan}</ListGroup.Item>
-												<ListGroup.Item><strong>Average Height:</strong> {species.average_height}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Homeworld:</strong> {species.homeworld ? species.homeworld.name : 'Unspecified'}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Language:</strong> {species.language}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Designation:</strong> {species.designation}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Classification:</strong> {species.classification}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Average Life Span:</strong> {species.average_lifespan}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Average Height:</strong> {species.average_height}</ListGroup.Item>
 											</ListGroup>
 											<Accordion className="mt-4">
 												<ResourceAccordion title="Films" items={species.films} basePath="films" eventKey="0" />

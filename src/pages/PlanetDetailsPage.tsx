@@ -77,7 +77,7 @@ const PlanetDetailsPage = () => {
 				<Container className="my-5">
 					<Row className="justify-content-center">
 						<Col md={8}>
-							<Card className="shadow-lightsaber-theme-sensitive">
+							<Card className="card-glass-static shadow-lightsaber-theme-sensitive">
 								<Row className="g-0">
 									<Col md={4}>
 										<Card.Img
@@ -93,12 +93,12 @@ const PlanetDetailsPage = () => {
 										<Card.Body className="mb-5">
 											<Card.Title as="h1" className="starwars-font">{planet.name}</Card.Title>
 											<ListGroup variant="flush" className="mt-3">
-												<ListGroup.Item><strong>Climate:</strong> {planet.climate}</ListGroup.Item>
-												<ListGroup.Item><strong>Terrain:</strong> {planet.terrain}</ListGroup.Item>
-												<ListGroup.Item><strong>Diameter:</strong> {planet.diameter}</ListGroup.Item>
-												<ListGroup.Item><strong>Gravity:</strong> {planet.gravity}</ListGroup.Item>
-												<ListGroup.Item><strong>Orbital Period:</strong> {planet.orbital_period}</ListGroup.Item>
-												<ListGroup.Item><strong>Rotation Period:</strong> {planet.rotation_period}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Climate:</strong> {planet.climate}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Terrain:</strong> {planet.terrain}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Diameter:</strong> {planet.diameter}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Gravity:</strong> {planet.gravity}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Orbital Period:</strong> {planet.orbital_period}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Rotation Period:</strong> {planet.rotation_period}</ListGroup.Item>
 											</ListGroup>
 											<Accordion className="mt-4">
 												<ResourceAccordion title="Films" items={planet.films} basePath="films" eventKey="0" />

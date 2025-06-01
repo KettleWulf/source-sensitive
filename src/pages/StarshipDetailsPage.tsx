@@ -77,7 +77,7 @@ const StarshipDetailsPage = () => {
 				<Container className="my-5">
 					<Row className="justify-content-center">
 						<Col md={8}>
-							<Card className="shadow-lightsaber-theme-sensitive">
+							<Card className="card-glass-static shadow-lightsaber-theme-sensitive">
 								<Row className="g-0">
 									<Col md={4}>
 										<Card.Img
@@ -93,12 +93,12 @@ const StarshipDetailsPage = () => {
 										<Card.Body className="mb-5">
 											<Card.Title as="h1" className="starwars-font">{starship.name}</Card.Title>
 											<ListGroup variant="flush" className="mt-3">
-												<ListGroup.Item><strong>Model:</strong> {starship.model}</ListGroup.Item>
-												<ListGroup.Item><strong>Class:</strong> {starship.starship_class}</ListGroup.Item>
-												<ListGroup.Item><strong>Cost:</strong> {starship.cost_in_credits}</ListGroup.Item>
-												<ListGroup.Item><strong>Cargo Capacity:</strong> {starship.cargo_capacity}</ListGroup.Item>
-												<ListGroup.Item><strong>Max Atmosphering Speed:</strong> {starship.max_atmosphering_speed}</ListGroup.Item>
-												<ListGroup.Item><strong>Manufacturer:</strong> {starship.manufacturer}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Model:</strong> {starship.model}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Class:</strong> {starship.starship_class}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Cost:</strong> {starship.cost_in_credits}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Cargo Capacity:</strong> {starship.cargo_capacity}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Max Atmosphering Speed:</strong> {starship.max_atmosphering_speed}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Manufacturer:</strong> {starship.manufacturer}</ListGroup.Item>
 											</ListGroup>
 											<Accordion className="mt-4">
 												<ResourceAccordion title="Films" items={starship.films} basePath="films" eventKey="0" />

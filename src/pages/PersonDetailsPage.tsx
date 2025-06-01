@@ -81,7 +81,7 @@ const PersonDetailsPage = () => {
 						<Row className="justify-content-center">
 							<Col md={8}>
 								<Card 
-									className="shadow-lightsaber-theme-sensitive">
+									className="card-glass-static shadow-lightsaber-theme-sensitive">
 									<Row className="g-0">
 									<Col md={4}>
 										<Card.Img 
@@ -95,12 +95,12 @@ const PersonDetailsPage = () => {
 											<Card.Title as="h1" className="starwars-font">{person.name}</Card.Title>
 
 											<ListGroup variant="flush" className="mt-3">
-												<ListGroup.Item><strong>Birth Year:</strong> {person.birth_year}</ListGroup.Item>
-												<ListGroup.Item><strong>Home World:</strong> {person.homeworld.name}</ListGroup.Item>
-												<ListGroup.Item><strong>Eye Color:</strong> {person.eye_color}</ListGroup.Item>
-												<ListGroup.Item><strong>Hair Color:</strong> {person.hair_color}</ListGroup.Item>
-												<ListGroup.Item><strong>Height:</strong> {person.height}</ListGroup.Item>
-												<ListGroup.Item><strong>Affiliations:</strong> {joinStringArray(person.affiliations)}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Birth Year:</strong> {person.birth_year}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Home World:</strong> {person.homeworld.name}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Eye Color:</strong> {person.eye_color}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Hair Color:</strong> {person.hair_color}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Height:</strong> {person.height}</ListGroup.Item>
+												<ListGroup.Item className="transparent"><strong>Affiliations:</strong> {joinStringArray(person.affiliations)}</ListGroup.Item>
 											</ListGroup>
 
 											<Accordion className="mt-4 mb-5">
