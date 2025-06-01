@@ -13,7 +13,7 @@ const Navigation = () => {
 	return (
 		<Navbar 
 			className={`navbar-metal text-shadow-mode-${isDarkMode ? "dark" : "light"}`} 
-			expand="md">
+			expand="lg">
 			<Container>
 				<Navbar.Brand as={Link} to="/" className="home-link starwars-font fs-3">Source &bull; Sensitive</Navbar.Brand>
 

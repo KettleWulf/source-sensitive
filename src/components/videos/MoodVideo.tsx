@@ -9,7 +9,7 @@ const MoodVideo = () => {
 	};
 
 	return (
-		<Card className="shadow m-auto overflow-hidden rounded" style={{ maxWidth: 500 }}>
+		<Card className="video-floating m-auto overflow-hidden rounded" style={{ maxWidth: 500 }}>
 			{!showStill ? (
 				<video
 					src="/videos/mood-starwars.mp4"
