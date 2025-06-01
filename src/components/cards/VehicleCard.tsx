@@ -26,13 +26,13 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
 				<Card.Body className="card-body-relative d-flex flex-column">
 					<Card.Title className="starwars-font card-title-clamp mb-2 fs-4">{vehicle.name}</Card.Title>
 					<Card.Text className="mb-1">
-						<strong>Manufacturer:</strong> {vehicle.manufacturer}
-					</Card.Text>
-					<Card.Text className="mb-1">
 						<strong>Model:</strong> {vehicle.model}
 					</Card.Text>
-					<Card.Text className="mb-5">
+					<Card.Text className="mb-1">
 						<strong>Class:</strong> {vehicle.vehicle_class}
+					</Card.Text>
+					<Card.Text className="mb-5">
+						<strong>Manufacturer:</strong> {vehicle.manufacturer}
 					</Card.Text>
 
 					<div className="card-button-bottom-right mt-3">

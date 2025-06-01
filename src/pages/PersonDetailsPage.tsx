@@ -1,21 +1,30 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router"
 import * as PeopleAPI from "../services/people.api";
-import { useEffect, useState } from "react";
-import LoadingSpinner from "../components/spinners/LoadingSpinner";
-import ErrorAlert from "../components/ErrorAlert";
-import { Container, Row, Col, Card, ListGroup, Accordion, Button } from "react-bootstrap";
-import ResourceAccordion from "../components/ResourceAccordion";
 import type { Person } from "../types/SWAPI-types/people.types";
+
+import DetailsPagination from "../components/paginations/DetailsPagination";
+import ErrorAlert from "../components/ErrorAlert";
+import LoadingSpinner from "../components/spinners/LoadingSpinner";
+import ResourceAccordion from "../components/ResourceAccordion";
+
+import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import ListGroup from "react-bootstrap/ListGroup";
+import Row from "react-bootstrap/Row";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+
 import { getFallbackImage } from "../utils/getFallbackImage";
 import { joinStringArray } from "../utils/joinStringArray";
-import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
-import DetailsPagination from "../components/paginations/DetailsPagination";
 
 
 const PersonDetailsPage = () => {
 	const [person, setPerson] = useState<Person | null>(null);
 	const [error, setError] = useState<string | false>(false);
-	const [isLoading, setIsloading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [isNextPerson, setIsNextPerson] = useState(true);
 
 	const navigate = useNavigate()
@@ -27,15 +36,15 @@ const PersonDetailsPage = () => {
 	const getPerson = async (id: number) => {
 		setPerson(null);
 		setError(false);
-		setIsloading(true);
+		setIsLoading(true);
 
 		try {
 			const data = await PeopleAPI.getPerson(id);
 			setPerson(data);
-			setIsloading(false);
+			setIsLoading(false);
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "Can't even get a proper error...");
-			setIsloading(false);
+			setIsLoading(false);
 		}
 
 	}
@@ -101,17 +110,15 @@ const PersonDetailsPage = () => {
 								</Col>
 								</Row>
 								<div className="card-button-bottom-right mt-3">
-									
 										<Button variant="light" onClick={() => navigate(-1)}>
 										<MdKeyboardDoubleArrowLeft />Back
 										</Button>
-									
 								</div>
 							</Card>
 							<DetailsPagination
 								hasNextPage={isNextPerson}
 								hasPreviousPage={personId > 1}
-								onNextPage={() => navigate(`/people/${personId - 1}`)}
+								onNextPage={() => navigate(`/people/${personId + 1}`)}
 								onPreviousPage={() => navigate(`/people/${personId - 1}`)}
 								/>
 						</Col>

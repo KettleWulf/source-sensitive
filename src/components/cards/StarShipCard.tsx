@@ -26,13 +26,13 @@ const StarshipCard: React.FC<StarshipCardProps> = ({ starship }) => {
 				<Card.Body className="card-body-relative d-flex flex-column">
 					<Card.Title className="starwars-font card-title-clamp mb-2 fs-4">{starship.name}</Card.Title>
 					<Card.Text className="mb-1">
-						<strong>Manufacturer:</strong> {starship.manufacturer}
-					</Card.Text>
-					<Card.Text className="mb-1">
 						<strong>Model:</strong> {starship.model}
 					</Card.Text>
-					<Card.Text className="mb-5">
+					<Card.Text className="mb-1">
 						<strong>Class:</strong> {starship.starship_class}
+					</Card.Text>
+					<Card.Text className="mb-5">
+						<strong>Manufacturer:</strong> {starship.manufacturer}
 					</Card.Text>
 
 					<div className="card-button-bottom-right mt-3">
