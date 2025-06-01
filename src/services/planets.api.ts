@@ -12,7 +12,9 @@ export const getPlanets = async (page = 1, query: string) => {
 }
 
 export const getPlanet = async (id: number) => {
-	const res = await api.get<Planet>("/planets/" + id)
+	const res = await api.get<Planet>("/planets/" + id);
+	
+	await new Promise(r => setTimeout(r, 600));
 
 	return res.data
 }

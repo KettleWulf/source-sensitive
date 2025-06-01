@@ -12,7 +12,9 @@ export const getVehicles = async (page = 1, query: string) => {
 }
 
 export const getVehicle = async (id: number) => {
-	const res = await api.get<Vehicle>("/vehicles/" + id)
+	const res = await api.get<Vehicle>("/vehicles/" + id);
+
+	await new Promise(r => setTimeout(r, 600));
 
 	return res.data
 }

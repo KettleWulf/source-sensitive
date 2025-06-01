@@ -12,7 +12,9 @@ export const getStarships = async (page = 1, query: string) => {
 }
 
 export const getStarship = async (id: number) => {
-	const res = await api.get<Starship>("/starships/" + id)
+	const res = await api.get<Starship>("/starships/" + id);
+
+	await new Promise(r => setTimeout(r, 600));
 
 	return res.data
 }

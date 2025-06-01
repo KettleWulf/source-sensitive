@@ -19,6 +19,7 @@ import Row from "react-bootstrap/Row";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 
 import { getFallbackImage } from "../utils/getFallbackImage";
+import BB8Spinner from "../components/spinners/BB8Spinner";
 
 
 const VehicleDetailsPage = () => {
@@ -32,7 +33,6 @@ const VehicleDetailsPage = () => {
 	const navigate = useNavigate();
 
 	const getVehicle = async (id: number) => {
-		setVehicle(null);
 		setError(false);
 		setIsLoading(true);
 
@@ -61,7 +61,7 @@ const VehicleDetailsPage = () => {
 		getNextVehicle(vehicleId);
 	}, [vehicleId])
 
-	if (isLoading) {
+	if (isLoading && !vehicle) {
 		return <LoadingSpinner />;
 	}
 
@@ -70,55 +70,60 @@ const VehicleDetailsPage = () => {
 	}
 
 	return (
-		vehicle && <Container className="my-5">
-			<Row className="justify-content-center">
-				<Col md={8}>
-					<Card className="shadow-lightsaber-theme-sensitive">
-						<Row className="g-0">
-							<Col md={4}>
-								<Card.Img
-									src={getFallbackImage(vehicle.name, "Vehicles")}
-									alt={vehicle.name}
-									onError={(e) => {
-										(e.target as HTMLImageElement).src = '/images/uknown.png';
-									}}
-									style={{ height: "100%", objectFit: "cover" }}
-								/>
-							</Col>
-							<Col md={8}>
-								<Card.Body className="mb-5">
-									<Card.Title as="h1" className="starwars-font">{vehicle.name}</Card.Title>
-									<ListGroup variant="flush" className="mt-3">
-										<ListGroup.Item><strong>Model:</strong> {vehicle.model}</ListGroup.Item>
-										<ListGroup.Item><strong>Class:</strong> {vehicle.vehicle_class}</ListGroup.Item>
-										<ListGroup.Item><strong>Cost:</strong> {vehicle.cost_in_credits}</ListGroup.Item>
-										<ListGroup.Item><strong>Cargo Capacity:</strong> {vehicle.cargo_capacity}</ListGroup.Item>
-										<ListGroup.Item><strong>Max Atmosphering Speed:</strong> {vehicle.max_atmosphering_speed}</ListGroup.Item>
-										<ListGroup.Item><strong>Manufacturer:</strong> {vehicle.manufacturer}</ListGroup.Item>
-									</ListGroup>
-									<Accordion className="mt-4">
-										<ResourceAccordion title="Films" items={vehicle.films} basePath="films" eventKey="0" />
-										<ResourceAccordion title="Pilots" items={vehicle.pilots} basePath="people" eventKey="1" />
-									</Accordion>
-								</Card.Body>
-							</Col>
-						</Row>
-						<div className="card-button-bottom-right mt-3">
-							<Button variant="light" onClick={() => navigate(-1)}>
-								<MdKeyboardDoubleArrowLeft />Back
-							</Button>
-						</div>
-					</Card>
-					<DetailsPagination
+		<>
+			{isLoading && <BB8Spinner />}
+
+			{vehicle && (
+				<Container className="my-5">
+					<Row className="justify-content-center">
+						<Col md={8}>
+							<Card className="shadow-lightsaber-theme-sensitive">
+								<Row className="g-0">
+									<Col md={4}>
+										<Card.Img
+											src={getFallbackImage(vehicle.name, "Vehicles")}
+											alt={vehicle.name}
+											onError={(e) => {
+												(e.target as HTMLImageElement).src = '/images/uknown.png';
+											}}
+											style={{ height: "100%", objectFit: "cover" }}
+										/>
+									</Col>
+									<Col md={8}>
+										<Card.Body className="mb-5">
+											<Card.Title as="h1" className="starwars-font">{vehicle.name}</Card.Title>
+											<ListGroup variant="flush" className="mt-3">
+												<ListGroup.Item><strong>Model:</strong> {vehicle.model}</ListGroup.Item>
+												<ListGroup.Item><strong>Class:</strong> {vehicle.vehicle_class}</ListGroup.Item>
+												<ListGroup.Item><strong>Cost:</strong> {vehicle.cost_in_credits}</ListGroup.Item>
+												<ListGroup.Item><strong>Cargo Capacity:</strong> {vehicle.cargo_capacity}</ListGroup.Item>
+												<ListGroup.Item><strong>Max Atmosphering Speed:</strong> {vehicle.max_atmosphering_speed}</ListGroup.Item>
+												<ListGroup.Item><strong>Manufacturer:</strong> {vehicle.manufacturer}</ListGroup.Item>
+											</ListGroup>
+											<Accordion className="mt-4">
+												<ResourceAccordion title="Films" items={vehicle.films} basePath="films" eventKey="0" />
+												<ResourceAccordion title="Pilots" items={vehicle.pilots} basePath="people" eventKey="1" />
+											</Accordion>
+										</Card.Body>
+									</Col>
+								</Row>
+								<div className="card-button-bottom-right mt-3">
+									<Button variant="light" onClick={() => navigate(-1)}>
+										<MdKeyboardDoubleArrowLeft />Back
+									</Button>
+								</div>
+							</Card>
+							<DetailsPagination
 								hasNextPage={isNextVehicle}
 								hasPreviousPage={vehicleId > 1}
 								onNextPage={() => navigate(`/vehicles/${vehicleId + 1}`)}
 								onPreviousPage={() => navigate(`/vehicles/${vehicleId - 1}`)}
 								/>
-				</Col>
-			</Row>
-		</Container>
-	)
-}
+						</Col>
+					</Row>
+				</Container>
+			)}
+		</>
+	)}
 
 export default VehicleDetailsPage

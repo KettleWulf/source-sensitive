@@ -12,7 +12,9 @@ export const getPeople = async (page = 1, query: string) => {
 }
 
 export const getPerson = async (id: number) => {
-	const res = await api.get<Person>("/people/" + id)
+	const res = await api.get<Person>("/people/" + id);
+
+	await new Promise(r => setTimeout(r, 600));
 
 	return res.data
 }

@@ -12,7 +12,7 @@ interface PlanetCardProps {
 const PlanetCard: React.FC<PlanetCardProps> = ({ planet }) => {
 	return (
 		<Link to={`/planets/${planet.id}`} className="text-decoration-none text-dark">
-			<Card className="shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
+			<Card className="card-glass shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
 				<Card.Img
 					className="image-ratio"
 					variant="top"

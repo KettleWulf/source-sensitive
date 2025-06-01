@@ -12,7 +12,9 @@ export const getSpecies = async (page = 1, query: string) => {
 }
 
 export const getSingleSpecies = async (id: number) => {
-	const res = await api.get<Species>("/species/" + id)
+	const res = await api.get<Species>("/species/" + id);
+
+	await new Promise(r => setTimeout(r, 600));
 
 	return res.data
 }

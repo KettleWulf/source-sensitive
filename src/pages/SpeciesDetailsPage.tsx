@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router"
 import * as SpeciesAPI from "../services/species.api";
 import type { Species } from "../types/SWAPI-types/species.types";
 
+import BB8Spinner from "../components/spinners/BB8Spinner";
 import DetailsPagination from "../components/paginations/DetailsPagination";
 import ErrorAlert from "../components/ErrorAlert";
 import LoadingSpinner from "../components/spinners/LoadingSpinner";
@@ -33,7 +34,6 @@ const SpeciesDetailsPage = () => {
 	const navigate = useNavigate();
 
 	const getSpecies = async (id: number) => {
-		setSpecies(null);
 		setError(false);
 		setIsLoading(true);
 
@@ -62,7 +62,7 @@ const SpeciesDetailsPage = () => {
 		getNextSpecies(speciesId)
 	}, [speciesId])
 
-	if (isLoading) {
+	if (isLoading && !species) {
 		return <LoadingSpinner />;
 	}
 
@@ -71,55 +71,60 @@ const SpeciesDetailsPage = () => {
 	}
 
 	return (
-		species && <Container className="my-5">
-			<Row className="justify-content-center">
-				<Col md={8}>
-					<Card className="shadow-lightsaber-theme-sensitive">
-						<Row className="g-0">
-							<Col md={4}>
-								<Card.Img
-									src={getFallbackImage(species.name, "Species")}
-									alt={species.name}
-									onError={(e) => {
-										(e.target as HTMLImageElement).src = '/images/uknown.png';
-									}}
-									style={{ height: "100%", objectFit: "cover" }}
-								/>
-							</Col>
-							<Col md={8}>
-								<Card.Body className="mb-5">
-									<Card.Title as="h1" className="starwars-font">{species.name}</Card.Title>
-									<ListGroup variant="flush" className="mt-3">
-										<ListGroup.Item><strong>Homeworld:</strong> {species.homeworld ? species.homeworld.name : 'Unspecified'}</ListGroup.Item>
-										<ListGroup.Item><strong>Language:</strong> {species.language}</ListGroup.Item>
-										<ListGroup.Item><strong>Designation:</strong> {species.designation}</ListGroup.Item>
-										<ListGroup.Item><strong>Classification:</strong> {species.classification}</ListGroup.Item>
-										<ListGroup.Item><strong>Average Life Span:</strong> {species.average_lifespan}</ListGroup.Item>
-										<ListGroup.Item><strong>Average Height:</strong> {species.average_height}</ListGroup.Item>
-									</ListGroup>
-									<Accordion className="mt-4">
-										<ResourceAccordion title="Films" items={species.films} basePath="films" eventKey="0" />
-										<ResourceAccordion title="People" items={species.people} basePath="people" eventKey="1" />
-									</Accordion>
-								</Card.Body>
-							</Col>
-						</Row>
-						<div className="card-button-bottom-right mt-3">
-							<Button variant="light" onClick={() => navigate(-1)}>
-								<MdKeyboardDoubleArrowLeft />Back
-							</Button>
-						</div>
-					</Card>
-					<DetailsPagination
+		<>
+			{isLoading && <BB8Spinner />}
+
+			{species && (
+				<Container className="my-5">
+					<Row className="justify-content-center">
+						<Col md={8}>
+							<Card className="shadow-lightsaber-theme-sensitive">
+								<Row className="g-0">
+									<Col md={4}>
+										<Card.Img
+											src={getFallbackImage(species.name, "Species")}
+											alt={species.name}
+											onError={(e) => {
+												(e.target as HTMLImageElement).src = '/images/uknown.png';
+											}}
+											style={{ height: "100%", objectFit: "cover" }}
+										/>
+									</Col>
+									<Col md={8}>
+										<Card.Body className="mb-5">
+											<Card.Title as="h1" className="starwars-font">{species.name}</Card.Title>
+											<ListGroup variant="flush" className="mt-3">
+												<ListGroup.Item><strong>Homeworld:</strong> {species.homeworld ? species.homeworld.name : 'Unspecified'}</ListGroup.Item>
+												<ListGroup.Item><strong>Language:</strong> {species.language}</ListGroup.Item>
+												<ListGroup.Item><strong>Designation:</strong> {species.designation}</ListGroup.Item>
+												<ListGroup.Item><strong>Classification:</strong> {species.classification}</ListGroup.Item>
+												<ListGroup.Item><strong>Average Life Span:</strong> {species.average_lifespan}</ListGroup.Item>
+												<ListGroup.Item><strong>Average Height:</strong> {species.average_height}</ListGroup.Item>
+											</ListGroup>
+											<Accordion className="mt-4">
+												<ResourceAccordion title="Films" items={species.films} basePath="films" eventKey="0" />
+												<ResourceAccordion title="People" items={species.people} basePath="people" eventKey="1" />
+											</Accordion>
+										</Card.Body>
+									</Col>
+								</Row>
+								<div className="card-button-bottom-right mt-3">
+									<Button variant="light" onClick={() => navigate(-1)}>
+										<MdKeyboardDoubleArrowLeft />Back
+									</Button>
+								</div>
+							</Card>
+							<DetailsPagination
 								hasNextPage={isNextSpecies}
 								hasPreviousPage={speciesId > 1}
 								onNextPage={() => navigate(`/species/${speciesId + 1}`)}
 								onPreviousPage={() => navigate(`/species/${speciesId - 1}`)}
 								/>
-				</Col>
-			</Row>
-		</Container>
-	)
-}
+						</Col>
+					</Row>
+				</Container>
+			)}
+		</>
+	)}
 
 export default SpeciesDetailsPage

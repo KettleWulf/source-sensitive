@@ -12,7 +12,9 @@ export const getFilms = async (page = 1, query: string) => {
 }
 
 export const getSingleFilm = async (id: number) => {
-	const res = await api.get<Film>("/films/" + id)
+	const res = await api.get<Film>("/films/" + id);
+
+	await new Promise(r => setTimeout(r, 600));
 
 	return res.data
 }

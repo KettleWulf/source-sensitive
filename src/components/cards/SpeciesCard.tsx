@@ -12,7 +12,7 @@ interface SpeciesCardProps {
 const SpeciesCard: React.FC<SpeciesCardProps> = ({ species }) => {
 	return (
 		<Link to={`/species/${species.id}`} className="text-decoration-none text-dark">
-			<Card className="shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
+			<Card className="card-glass shadow-lightsaber-theme-sensitive-hover hover-grow-effect h-100">
 				<Card.Img
 					className="image-ratio"
 					variant="top"
