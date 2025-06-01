@@ -12,10 +12,9 @@ const Navigation = () => {
 	const { isDarkMode, toggleTheme } = useTheme();
 
 	return (
-		<Navbar 
-			className={`navbar-metal text-shadow-mode-${isDarkMode ? "dark" : "light"}`} 
-			expand="lg">
-			<Container>
+		<Navbar className={`navbar-metal text-shadow-mode-${isDarkMode ? "dark" : "light"}`} expand="lg">
+
+			<Container className="icon-button-relative">
 				<Navbar.Brand as={Link} to="/" className="home-link starwars-font fs-3">Source &bull; Sensitive</Navbar.Brand>
 
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -27,17 +26,20 @@ const Navigation = () => {
 						<Nav.Link as={NavLink} to="/species">Species</Nav.Link>
 						<Nav.Link as={NavLink} to="/starships">Starships</Nav.Link>
 						<Nav.Link as={NavLink} to="/vehicles">Vehicles</Nav.Link>
-						<button 
-							className="round-icon-button ms-5 mb-1 fs-2"
-							aria-label="toggle theme"
-							title={isDarkMode ? "Let the Light guide you" : "Join the Dark Side"} 
-							onClick={toggleTheme}>
-								{isDarkMode ? <FaEmpire className="icon-shadow-mode-dark"/> : <FaGalacticRepublic className="icon-shadow-mode-light"/>}
-						</button>
 					</Nav>
-
 				</Navbar.Collapse>
+
+				<button 
+					className="round-icon-button ms-5 mb-1 fs-2"
+					aria-label="toggle theme"
+					title={isDarkMode ? "Let the Light guide you" : "Join the Dark Side"} 
+					onClick={toggleTheme}>
+						{isDarkMode ? <FaEmpire className="icon-shadow-mode-dark"/> : <FaGalacticRepublic className="icon-shadow-mode-light"/>}
+				</button>
+				
 			</Container>
+
+
 		</Navbar>
 	)
 }

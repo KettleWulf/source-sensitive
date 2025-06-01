@@ -177,8 +177,8 @@ body {
 			box-shadow: 0 0 5px rgba(0, 191, 255, 0.4);
 
 			&:focus {
-				border-color: rgba(169, 222, 240, 0.9);
-				box-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+				border-color: rgba(201, 234, 245, 0.9);
+				box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
 			}
 		}
 
@@ -251,7 +251,15 @@ body {
 
 }
 
+.icon-button-relative {
+	position: relative;
+}
 .round-icon-button {
+	position: absolute;
+	top: 0,4rem;
+	right: -2.5rem;
+	z-index: 1001;
+
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
@@ -264,6 +272,16 @@ body {
 	cursor: pointer;
 	padding: 0;
 	box-shadow: 0 0 8px rgba(49, 49, 49, 0.5);
+
+	@media (max-width: 640px) {
+		right: 1.2rem;
+		top: 4rem;
+		width: 30px;
+		height: 30px;
+
+		border-color: rgba(124, 124, 124, 0.514);
+		box-shadow: 0 0 8px rgba(97, 97, 97, 0.692);
+	}
 }
 
 .icon-shadow-mode-dark {
@@ -323,6 +341,10 @@ body {
 	perspective: 400px;
 	overflow: hidden;
 	height: 300px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 
