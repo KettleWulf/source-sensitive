@@ -49,7 +49,7 @@ const StarshipsPage = () => {
 	}, [isFetching]);
 
 	return (
-		<div className="container mt-3">
+		<div className="container mt-3 mb-5">
 			<h1 className="mb-3">
 				<Link to={"/" + resourceCategory.toLowerCase()} className="discreet-link">
 					<span className="h2 ms-3 mb-0">{resourceCategory}</span>
@@ -77,7 +77,7 @@ const StarshipsPage = () => {
 			)}
 			
 			{starships && (
-				<Row xs={1} sm={2} md={4} lg={5} className="g-4 min-height-400">
+				<Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4 min-height-400">
 					{starships.map(starship => (
 						<Col key={starship.id}>
 							<StarshipCard starship={starship} />
