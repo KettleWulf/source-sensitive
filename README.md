@@ -1,8 +1,8 @@
 # Source Sensitive
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3b7ffcbc-fd49-428b-abad-f710f68ced8b" alt="screen shot in dark mode" height="240" />
-  <img src="https://github.com/user-attachments/assets/8c2f7356-7ef9-47cc-9390-c6ad5f83116b" alt="screen shot in light mode" height="240" />
+  <img src="https://github.com/user-attachments/assets/3b7ffcbc-fd49-428b-abad-f710f68ced8b" alt="screen shot in dark mode" height="200" />
+  <img src="https://github.com/user-attachments/assets/8c2f7356-7ef9-47cc-9390-c6ad5f83116b" alt="screen shot in light mode" height="200" />
 </p>
 
 Source Sensitive is a Star Wars-themed wiki frontend built with React and TypeScript.
