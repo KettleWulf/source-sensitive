@@ -1,54 +1,91 @@
-# React + TypeScript + Vite
+# Source Sensitive
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3b7ffcbc-fd49-428b-abad-f710f68ced8b" alt="screen shot in dark mode" height="240" />
+  <img src="https://github.com/user-attachments/assets/8c2f7356-7ef9-47cc-9390-c6ad5f83116b" alt="screen shot in light mode" height="240" />
+</p>
 
-Currently, two official plugins are available:
+Source Sensitive is a Star Wars-themed wiki frontend built with React and TypeScript.
+It consumes a SWAPI-compatible backend and lets users browse and search:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Films
+- People
+- Planets
+- Species
+- Starships
+- Vehicles
 
-## Expanding the ESLint configuration
+It includes list pages with search and pagination, detail pages for each resource, linked related resources, and a light/dark theme toggle.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- React 19
+- TypeScript
+- Vite
+- React Router
+- Axios
+- React Bootstrap + Bootstrap
+- Sass
+- ESLint
+- Netlify (deployment target)
+
+## Getting Started
+
+### 1. Install dependencies
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Configure environment variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a `.env` file from `.env-example` and set:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```env
+VITE_API_BASE_URL=https://your-api-base-url
 ```
+
+Example backend base URL format:
+
+```text
+https://your-api.example.com
+```
+
+The app expects endpoints such as `/films`, `/people`, `/planets`, `/species`, `/starships`, and `/vehicles`.
+
+### 3. Start development server
+
+```bash
+npm run dev
+```
+
+## Available Scripts
+
+- `npm run dev` - Start Vite dev server
+- `npm run build` - Type-check and build for production
+- `npm run preview` - Preview production build locally
+- `npm run check:0-lint` - Run ESLint
+- `npm run check:1-tsc` - Run TypeScript type checks
+- `npm run check:2-type-coverage` - Enforce 100% type coverage
+- `npm run check` - Run all checks
+
+## Project Structure
+
+```text
+src/
+  components/    Reusable UI components
+  contexts/      React context providers (theme)
+  hooks/         Custom hooks (data fetching, pagination, theme)
+  lib/           Shared API client setup
+  pages/         Route-level pages and detail views
+  services/      API resource functions
+  types/         Shared and SWAPI resource types
+```
+
+## Build and Deploy
+
+This project is configured for Netlify via `netlify.toml`:
+
+- Build command: `tsc && vite build`
+- Publish directory: `dist`
+- SPA fallback redirect to `index.html`
